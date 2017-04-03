@@ -12,4 +12,8 @@ module Joaquin
   LOG_TYPE_OUTPUT     = 'output'
   LOG_TYPE_ERROR      = 'error'
 
+  PRINT_TYPE_DEBUG    = 'DEBUG'
+  PRINT_TYPE_INFO     = 'INFO '
+  PRINT_TYPE_ERROR    = 'ERROR'
+
 end

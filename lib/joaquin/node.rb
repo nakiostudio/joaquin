@@ -15,8 +15,16 @@ module Joaquin
         Host: '127.0.0.1',
         Port: options.port
       }
+
+      Print.warning("Booting up node at #{rack_options[:Host]}:#{rack_options[:Port]}...")
+
       Rack::Handler::WEBrick.run(Node, rack_options) do |server|
-        [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
+        [:INT, :TERM].each do |signal|
+          trap(signal) do
+            Print.warning('Received signal, killing node...')
+            server.stop
+          end
+        end
       end
     end
 

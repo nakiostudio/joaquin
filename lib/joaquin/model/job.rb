@@ -40,7 +40,7 @@ module Joaquin
             Job.submit_job_update(weak_self)
             completion.call(weak_self)
           end
-        else if step.status == Joaquin::STATUS_FAILED
+        elsif step.status == Joaquin::STATUS_FAILED
           weak_self.status = Joaquin::STATUS_FAILED
           Job.submit_job_update(weak_self)
           completion.call(weak_self)

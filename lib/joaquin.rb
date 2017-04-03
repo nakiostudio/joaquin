@@ -1,5 +1,12 @@
 require 'commander'
+require 'colorize'
+require 'joaquin/constants'
 require 'joaquin/version'
+require 'joaquin/utils/print'
+require 'joaquin/utils/api'
+require 'joaquin/model/step'
+require 'joaquin/model/job'
+require 'joaquin/node'
 
 module Joaquin
   class << self
@@ -53,8 +60,7 @@ module Joaquin
           Joaquin.options = options
 
           # Run node
-          require 'joaquin/node'
-          Joaquin::Node.start(options)
+          Node.start(options)
         end
       end
       run!

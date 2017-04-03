@@ -1,4 +1,3 @@
-require 'fileoptions'
 require 'open3'
 
 module Joaquin
