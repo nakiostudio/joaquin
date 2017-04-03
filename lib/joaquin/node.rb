@@ -17,7 +17,6 @@ module Joaquin
       }
 
       Print.warning("Booting up node at #{rack_options[:Host]}:#{rack_options[:Port]}...")
-
       Rack::Handler::WEBrick.run(Node, rack_options) do |server|
         [:INT, :TERM].each do |signal|
           trap(signal) do
