@@ -23,21 +23,31 @@ module Joaquin
 
     def run(&completion)
       weak_self = WeakRef.new(self)
+
+      # Skip running if step has already been started
       unless @status == Joaquin::STATUS_UNSTARTED
         Print.error("Trying to rerun started step with id #{@step_id.magenta} and job_id #{@job_id.magenta}")
         completion.call(weak_self)
       end
 
+      # Run script
       @status = Joaquin::STATUS_STARTED
       Print.debug("Running step with id #{@step_id.magenta} and job_id #{@job_id.magenta}...")
       Open3.popen3("sh #{@file_name}", chdir: @dir_path) do |stdin, stdout, stderr, thread|
+        # Process script standard output
         Thread.new do
           stdout.each { |l| Step.submit_log(weak_self, Joaquin::LOG_TYPE_OUTPUT, l) }
         end
+
+        # Process script standard error
         Thread.new do
           stderr.each { |l| Step.submit_log(weak_self, Joaquin::LOG_TYPE_ERROR, l) }
         end
+
+        # Wait for thread to finish
         exit_status = thread.value
+
+        # Notify result
         Print.debug("Step with id #{weak_self.step_id.magenta} and job_id #{weak_self.job_id.magenta} finished with status #{exit_status.magenta}")
         weak_self.status = exit_status == 0 ? Joaquin::STATUS_SUCCESSFUL : Joaquin::STATUS_FAILED
         Step.submit_step_update(weak_self)

@@ -24,13 +24,19 @@ module Joaquin
 
     def run(&completion)
       weak_self = WeakRef.new(self)
+
+      # Skip if job has already been started
       unless @status == Joaquin::STATUS_UNSTARTED
         Print.error("Trying to rerun started job with id #{@job_id.magenta}")
         completion.call(weak_self)
       end
 
-      # TODO: Set env variables
+      # Set environment variables
+      @env.each do |key, value|
+        ENV[key] = value
+      end
 
+      # Run steps
       @status = Joaquin::STATUS_STARTED
       Print.debug("Running job with id #{@job_id.magenta}...")
       completion = lambda do |step|
