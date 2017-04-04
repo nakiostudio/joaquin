@@ -4,6 +4,7 @@ require 'joaquin/constants'
 require 'joaquin/version'
 require 'joaquin/utils/print'
 require 'joaquin/utils/api'
+require 'joaquin/utils/queue'
 require 'joaquin/model/step'
 require 'joaquin/model/job'
 require 'joaquin/node'
@@ -45,12 +46,14 @@ module Joaquin
         c.option '--server-url STRING', String, 'Url of the Joaquin server'
         c.option '--port STRING', String, 'Port the node will listen to. Default is 4567'
         c.option '--token STRING', String, 'Token used by the node to grant the incoming requests and sign the outcoming ones'
+        c.option '--concurrent-jobs INTEGER', Integer, 'Maximum number of jobs that can run concurrently'
         c.option '--verbose', 'Increases the amount of information logged'
         c.action do |args, options|
           # Default options
           options.default \
             port: '4567',
             jobs_directory: 'jobs',
+            concurrent_jobs: 1,
             verbose: false
 
           # Set env variables

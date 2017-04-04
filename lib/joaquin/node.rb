@@ -5,7 +5,7 @@ require 'json'
 module Joaquin
   class Node
 
-    @@jobs = {}
+    @@queue = nil
 
     def self.call(request)
       # Status
@@ -26,6 +26,9 @@ module Joaquin
       Print.warning("Booting up node at #{rack_options[:Host]}:#{rack_options[:Port]}...")
       Rack::Handler::WEBrick.run(Node, rack_options) do |server|
         Print.success("Node running at #{server.config[:BindAddress]}:#{server.config[:Port]}")
+        # Create jobs queue
+        @@queue = Queue.new(Joaquin.options.concurrent_jobs)
+        # Subscribe to kill signal
         [:INT, :TERM].each do |signal| trap(signal) do
             Print.warning('Received signal, killing node...')
             server.stop
