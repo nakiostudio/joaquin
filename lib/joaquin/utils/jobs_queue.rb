@@ -54,7 +54,7 @@ module Joaquin
 
         # Dequeue first job, create and store running job
         job = @queued_jobs.first
-        running_job = RunningJob.next(job)
+        running_job = RunningJob.new(job)
         @running_jobs[job.job_id] = running_job
 
         # Run job in a different thread
