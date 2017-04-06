@@ -72,6 +72,9 @@ module Joaquin
     private
 
     def dequeue_job
+      job = nil
+      running_job = nil
+
       @@lock.synchronize do
         # Skip if there are no items queued o running queue is already full
         return if @queued_jobs.first.nil? || @running_jobs.keys.count == @concurrent_jobs
@@ -81,23 +84,17 @@ module Joaquin
         running_job = RunningJob.new(job)
         @running_jobs[job.job_id] = running_job
 
-        # Run job in a different thread
-        weak_self = WeakRef.new(self)
-        running_job.thread = Thread.new do
-          job.run(weak_self.common_job_completion)
-        end
-
         # Remove from queued jobs
         @queued_jobs.shift
       end
-    end
 
-    def common_job_completion
+      # Run job in a different thread
       weak_self = WeakRef.new(self)
-      completion = lambda do |job|
-        weak_self.complete_job(job)
+      running_job.thread = Thread.new do
+        job.run |weak_job| do
+          weak_self.complete_job(weak_job)
+        end
       end
-      return completion
     end
 
     def complete_job(job)
