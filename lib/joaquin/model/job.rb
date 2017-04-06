@@ -60,6 +60,11 @@ module Joaquin
       @first_step.run(completion)
     end
 
+    def cancel
+      @status = Joaquin::STATUS_CANCELLED
+      Job.submit_job_update(self)
+    end
+
     def self.submit_job_update(job)
       # TODO: Submit update
       Print.debug("Updating remote status (#{job.status.magenta}) for job with id #{job.job_id.magenta} and job_id #{step.job_id.magenta}...")
