@@ -56,12 +56,10 @@ module Joaquin
     end
 
     def self.submit_step_log(step, type, line)
-      Print.debug("Updating log line with type #{type.magenta} for step with id #{step.step_id.magenta} and job_id #{step.job_id.magenta}...")
       Api.shared.submit_step_log(step, type, line)
     end
 
     def self.submit_step_update(step)
-      Print.debug("Updating remote status (#{step.status.magenta}) for step with id #{step.step_id.magenta} and job_id #{step.job_id.magenta}...")
       Api.shared.submit_step_update(step)
     end
 

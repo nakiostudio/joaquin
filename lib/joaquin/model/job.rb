@@ -38,20 +38,20 @@ module Joaquin
 
       # Run steps
       @status = Joaquin::STATUS_STARTED
-      Print.debug("Running job with id #{@job_id.magenta}...")
+      Print.warning("Running job with id #{@job_id.magenta}...")
       step_completion = lambda do |step|
         if step.status == Joaquin::STATUS_SUCCESSFUL
           unless step.next_step.nil?
             step.next_step.run(step_completion)
           else
             weak_self.status = Joaquin::STATUS_SUCCESSFUL
-            Print.debug("Job with id #{weak_self.job_id.magenta} finished with status #{weak_self.status.magenta}")
+            Print.success("Job with id #{weak_self.job_id.magenta} finished with status #{weak_self.status.magenta}")
             Job.submit_job_update(weak_self)
             completion.call(weak_self)
           end
         elsif step.status == Joaquin::STATUS_FAILED
           weak_self.status = Joaquin::STATUS_FAILED
-          Print.debug("Job with id #{weak_self.job_id.magenta} finished with status #{weak_self.status.magenta}")
+          Print.warning("Job with id #{weak_self.job_id.magenta} finished with status #{weak_self.status.magenta}")
           Job.submit_job_update(weak_self)
           completion.call(weak_self)
         end
