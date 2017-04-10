@@ -16,4 +16,13 @@ module Joaquin
   PRINT_TYPE_INFO     = 'INFO '
   PRINT_TYPE_ERROR    = 'ERROR'
 
+  NODE_ENDPOINT_REGISTER_NODE       = '/node_api/node/register'
+  NODE_ENDPOINT_SUBMIT_JOB_UPDATE   = '/node_api/job/update'
+  NODE_ENDPOINT_SUBMIT_STEP_UPDATE  = '/node_api/step/update'
+  NODE_ENDPOINT_SUBMIT_STEP_LOG     = '/node_api/step/log'
+
+  SERVER_ENDPOINT_NODE_STATUS       = '/server_api/node/status'
+  SERVER_ENDPOINT_ENQUEUE_JOB       = '/server_api/job/enqueue'
+  SERVER_ENDPOINT_CANCEL_JOB        = '/server_api/job/cancel'
+
 end

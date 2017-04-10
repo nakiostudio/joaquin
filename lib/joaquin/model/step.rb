@@ -36,12 +36,12 @@ module Joaquin
       Open3.popen3("sh #{@file_name}", chdir: @dir_path) do |stdin, stdout, stderr, thread|
         # Process script standard output
         Thread.new do
-          stdout.each { |l| Step.submit_log(weak_self, Joaquin::LOG_TYPE_OUTPUT, l) }
+          stdout.each { |l| Step.submit_step_log(weak_self, Joaquin::LOG_TYPE_OUTPUT, l) }
         end
 
         # Process script standard error
         Thread.new do
-          stderr.each { |l| Step.submit_log(weak_self, Joaquin::LOG_TYPE_ERROR, l) }
+          stderr.each { |l| Step.submit_step_log(weak_self, Joaquin::LOG_TYPE_ERROR, l) }
         end
 
         # Wait for thread to finish
@@ -55,14 +55,14 @@ module Joaquin
       end
     end
 
-    def self.submit_log(step, type, line)
-      # TODO: Submit log
-      puts "#{type}: #{line}"
+    def self.submit_step_log(step, type, line)
+      Print.debug("Updating log line with type #{type.magenta} for step with id #{step.step_id.magenta} and job_id #{step.job_id.magenta}...")
+      Api.shared.submit_step_log(step, type, line)
     end
 
     def self.submit_step_update(step)
-      # TODO: Submit update
       Print.debug("Updating remote status (#{step.status.magenta}) for step with id #{step.step_id.magenta} and job_id #{step.job_id.magenta}...")
+      Api.shared.submit_step_update(step)
     end
 
   end

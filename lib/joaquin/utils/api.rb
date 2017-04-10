@@ -12,9 +12,9 @@ module Joaquin
       @base_uri = URI(Joaquin.options.server_url)
     end
 
-    def register_node(&completion)
-      parameters = {}
-      self.post('/node_api/node/register', parameters, completion)
+    def register_node(node_info, &completion)
+      parameters = node_info.hash
+      self.post(NODE_ENDPOINT_REGISTER_NODE, parameters, completion)
     end
 
     def submit_job_update(job)
@@ -22,7 +22,7 @@ module Joaquin
         job_id: job.job_id,
         status: job.status
       }
-      self.post('/node_api/job/update', parameters, nil)
+      self.post(NODE_ENDPOINT_SUBMIT_JOB_UPDATE, parameters, nil)
     end
 
     def submit_step_update(step)
@@ -31,10 +31,10 @@ module Joaquin
         step_id: step.step_id,
         status: step.status
       }
-      self.post('/node_api/step/update', parameters, nil)
+      self.post(NODE_ENDPOINT_SUBMIT_STEP_UPDATE, parameters, nil)
     end
 
-    def submit_log(step, type, line)
+    def submit_step_log(step, type, line)
       parameters = {
         job_id: step.job_id,
         step_id: step.step_id,
@@ -43,7 +43,7 @@ module Joaquin
           string: line
         }
       }
-      self.post('/node_api/step/log', parameters, nil)
+      self.post(NODE_ENDPOINT_SUBMIT_STEP_LOG, parameters, nil)
     end
 
     private

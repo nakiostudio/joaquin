@@ -45,6 +45,13 @@ module Joaquin
       started_jobs.each do |started_job|
         cancel_job_with_id(started_job.job_id)
       end
+
+      # Nullify thread
+      @loop_thread = nil
+    end
+
+    def is_running
+      return !(@loop_thread.nil?)
     end
 
     def add_job(job)

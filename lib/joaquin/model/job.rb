@@ -66,8 +66,8 @@ module Joaquin
     end
 
     def self.submit_job_update(job)
-      # TODO: Submit update
       Print.debug("Updating remote status (#{job.status.magenta}) for job with id #{job.job_id.magenta} and job_id #{step.job_id.magenta}...")
+      Api.shared.submit_job_update(job)
     end
 
   end
