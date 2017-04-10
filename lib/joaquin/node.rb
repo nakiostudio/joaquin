@@ -8,10 +8,30 @@ module Joaquin
     @@queue = nil
     @@info = nil
 
+    # Accessors
+
+    def self.queue
+      return @@queue
+    end
+
+    def self.queue=(new_queue)
+      @@queue = new_queue
+    end
+
+    def self.info
+      return @@info
+    end
+
+    def self.info=(new_info)
+      @@info = new_info
+    end
+
+    # Overriden static methods
+
     def self.call(request)
       # Validate
-      if request['HTTP_JOAQUIN_SERVER_TOKEN'] != Joaquin.options.token
-        return [401, {'Content-Type' => 'application/json'}, [{error: 'Invalid server token'}.to_json]]
+      if request['HTTP_JOAQUIN_SERVER_TOKEN'] != Joaquin.options.token || request['REQUEST_METHOD'] != 'POST'
+        return [401, {'Content-Type' => 'application/json'}, [{error: 'Invalid request'}.to_json]]
       end
 
       # Otherwise handle request
@@ -40,24 +60,30 @@ module Joaquin
       Rack::Handler::WEBrick.run(Node, rack_options) do |server|
         Print.success("Node running at #{server.config[:BindAddress]}:#{server.config[:Port]}")
 
+        # Subscribe to kill signal
+        [:INT, :TERM].each do |signal| trap(signal) do
+            Print.warning('Received signal, killing node...')
+            Node.queue.cancel do
+              server.stop
+            end
+          end
+        end
+
+        # Create Api
+        Api.shared = Api.new
+
         # Create node info object
         Node.info = NodeInfo.new(server.config[:BindAddress], server.config[:Port])
 
         # Create jobs queue
         Node.queue = JobsQueue.new(Joaquin.options.concurrent_jobs)
 
-        # Subscribe to kill signal
-        [:INT, :TERM].each do |signal| trap(signal) do
-            Print.warning('Received signal, killing node...')
-            Node.queue.cancel
-            server.stop
-          end
-        end
-
         # Register node remotelly
         Node.register_node
       end
     end
+
+    # Helper methods
 
     def self.tunnel_node
       # TODO: Start ngrok tunneling
@@ -66,7 +92,7 @@ module Joaquin
     def self.register_node
       Print.debug("Registering node at Joaquin server with address #{Joaquin.options.server_url.magenta}...")
       Api.shared.register_node(Node.info) do |response|
-        if respose.code == 201
+        if response.code == '201'
           Print.success('Successfully registered node')
 
           # Start queue loop

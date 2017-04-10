@@ -1,5 +1,7 @@
 require 'commander'
 require 'colorize'
+require 'weakref'
+require 'thread'
 require 'joaquin/constants'
 require 'joaquin/version'
 require 'joaquin/utils/print'
@@ -53,6 +55,7 @@ module Joaquin
           # Default options
           options.default \
             port: '4567',
+            server_url: 'http://localhost:9001',
             jobs_directory: 'jobs',
             concurrent_jobs: 1,
             verbose: false

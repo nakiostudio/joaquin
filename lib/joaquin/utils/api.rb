@@ -4,7 +4,7 @@ require 'json'
 module Joaquin
   class Api
 
-    @@shared = Api.new
+    @@shared = nil
 
     attr_accessor :base_uri
 
@@ -12,9 +12,23 @@ module Joaquin
       @base_uri = URI(Joaquin.options.server_url)
     end
 
+    # Static accessorts
+
+    def self.shared
+      return @@shared
+    end
+
+    def self.shared=(new_shared)
+      @@shared = new_shared
+    end
+
+    # Public methods
+
     def register_node(node_info, &completion)
       parameters = node_info.hash
-      self.post(NODE_ENDPOINT_REGISTER_NODE, parameters, completion)
+      post(NODE_ENDPOINT_REGISTER_NODE, parameters) do |response|
+        completion.call(response)
+      end
     end
 
     def submit_job_update(job)
@@ -22,7 +36,7 @@ module Joaquin
         job_id: job.job_id,
         status: job.status
       }
-      self.post(NODE_ENDPOINT_SUBMIT_JOB_UPDATE, parameters, nil)
+      post(NODE_ENDPOINT_SUBMIT_JOB_UPDATE, parameters)
     end
 
     def submit_step_update(step)
@@ -31,7 +45,7 @@ module Joaquin
         step_id: step.step_id,
         status: step.status
       }
-      self.post(NODE_ENDPOINT_SUBMIT_STEP_UPDATE, parameters, nil)
+      post(NODE_ENDPOINT_SUBMIT_STEP_UPDATE, parameters)
     end
 
     def submit_step_log(step, type, line)
@@ -43,7 +57,7 @@ module Joaquin
           string: line
         }
       }
-      self.post(NODE_ENDPOINT_SUBMIT_STEP_LOG, parameters, nil)
+      post(NODE_ENDPOINT_SUBMIT_STEP_LOG, parameters)
     end
 
     private

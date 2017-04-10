@@ -1,7 +1,10 @@
 module Joaquin
   class Print
 
-    def self.debug(messsage)
+    STDOUT.sync = true
+    STDERR.sync = true
+
+    def self.debug(message)
       # Skip if Debug mode is disabled
       return unless Joaquin.options.verbose
 
