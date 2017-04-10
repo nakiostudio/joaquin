@@ -112,6 +112,7 @@ module Joaquin
       # Run job in a different thread
       weak_self = WeakRef.new(self)
       running_job.thread = Thread.new do
+        Print.debug("Running job with id #{job.job_id.magenta}")
         job.run do |weak_job|
           weak_self.complete_job(weak_job)
         end

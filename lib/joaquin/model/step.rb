@@ -9,11 +9,11 @@ module Joaquin
       @job_id = job_id
       @step_id = json['step_id']
       @status = Joaquin::STATUS_UNSTARTED
-      @dir_path = File.join(Joaquin.jobs_directory, @job_id)
+      @dir_path = File.join(Joaquin.options.jobs_directory, @job_id)
       @file_name = "#{@step_id}.sh"
 
       # Write script to file
-      file_path = File.join(dir_path, file_name)
+      file_path = File.join(@dir_path, @file_name)
       Print.debug("Writing step script at path #{file_path}")
       FileUtils.mkdir_p(@dir_path)
       File.open(file_path, 'wb') do |file|
@@ -21,7 +21,7 @@ module Joaquin
       end
     end
 
-    def run(&completion)
+    def run(completion)
       weak_self = WeakRef.new(self)
 
       # Skip running if step has already been started
@@ -45,10 +45,10 @@ module Joaquin
         end
 
         # Wait for thread to finish
-        exit_status = thread.value
+        exit_status = thread.value.exitstatus
 
         # Notify result
-        Print.debug("Step with id #{weak_self.step_id.magenta} and job_id #{weak_self.job_id.magenta} finished with status #{exit_status.magenta}")
+        Print.debug("Step with id #{weak_self.step_id.magenta} and job_id #{weak_self.job_id.magenta} finished with status #{exit_status}")
         weak_self.status = exit_status == 0 ? Joaquin::STATUS_SUCCESSFUL : Joaquin::STATUS_FAILED
         Step.submit_step_update(weak_self)
         completion.call(weak_self)

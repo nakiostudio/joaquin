@@ -6,7 +6,7 @@ module Joaquin
     def initialize(json)
       @job_id = json['job_id']
       @type = json['type']
-      @env = json['env']
+      @env = json['env'] || []
       @status = Joaquin::STATUS_UNSTARTED
 
       # Create steps and link in order
@@ -39,10 +39,10 @@ module Joaquin
       # Run steps
       @status = Joaquin::STATUS_STARTED
       Print.debug("Running job with id #{@job_id.magenta}...")
-      completion = lambda do |step|
+      step_completion = lambda do |step|
         if step.status == Joaquin::STATUS_SUCCESSFUL
           unless step.next_step.nil?
-            step.next_step.run(completion)
+            step.next_step.run(step_completion)
           else
             weak_self.status = Joaquin::STATUS_SUCCESSFUL
             Print.debug("Job with id #{weak_self.job_id.magenta} finished with status #{weak_self.status.magenta}")
@@ -57,7 +57,7 @@ module Joaquin
         end
       end
 
-      @first_step.run(completion)
+      @first_step.run(step_completion)
     end
 
     def cancel
@@ -66,7 +66,7 @@ module Joaquin
     end
 
     def self.submit_job_update(job)
-      Print.debug("Updating remote status (#{job.status.magenta}) for job with id #{job.job_id.magenta} and job_id #{step.job_id.magenta}...")
+      Print.debug("Updating remote status (#{job.status.magenta}) for job with id #{job.job_id.magenta}")
       Api.shared.submit_job_update(job)
     end
 

@@ -39,13 +39,15 @@ module Joaquin
       when SERVER_ENDPOINT_NODE_STATUS
         # TODO return node status
       when SERVER_ENDPOINT_ENQUEUE_JOB
-        # TODO add job to queue
+        json = JSON.parse(request['rack.input'].read)
+        job = Job.new(json)
+        Node.queue.add_job(job)
       when SERVER_ENDPOINT_CANCEL_JOB
         # TODO cancel running job
       else
         return [404, {'Content-Type' => 'application/json'}, [{error: 'Resource could not be found'}.to_json]]
       end
-      [200, {'Content-Type' => 'application/json'}, [request.to_json]]
+      [200, {'Content-Type' => 'application/json'}, [{}.to_json]]
     end
 
     def self.start(options)

@@ -52,6 +52,9 @@ module Joaquin
         c.option '--concurrent-jobs INTEGER', Integer, 'Maximum number of jobs that can run concurrently'
         c.option '--verbose', 'Increases the amount of information logged'
         c.action do |args, options|
+          STDOUT.sync = true
+          STDERR.sync = true
+
           # Default options
           options.default \
             port: '4567',
