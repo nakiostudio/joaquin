@@ -8,10 +8,20 @@ module Joaquin
     @@queue = nil
 
     def self.call(request)
-      # Status
-      # Run job
-      # Cancel job
-      # Job details
+      case request['REQUEST_PATH']
+      when '/status'
+        # TODO return node status
+      when '/jobs/run'
+        # TODO add job to queue
+      when '/jobs/cancel'
+        # TODO cancel running job
+      when '/jobs/job'
+        # TODO details of specific job
+      when '/jobs'
+        # TODO details of enqueued and running jobs
+      else
+        # TODO not found
+      end
       [200, {'Content-Type' => 'application/json'}, [request.to_json]]
     end
 
@@ -27,7 +37,7 @@ module Joaquin
       Rack::Handler::WEBrick.run(Node, rack_options) do |server|
         Print.success("Node running at #{server.config[:BindAddress]}:#{server.config[:Port]}")
         # Create jobs queue
-        @@queue = JobsQueue.new(Joaquin.options.concurrent_jobs)
+        Node.queue = JobsQueue.new(Joaquin.options.concurrent_jobs)
         # Subscribe to kill signal
         [:INT, :TERM].each do |signal| trap(signal) do
             Print.warning('Received signal, killing node...')
