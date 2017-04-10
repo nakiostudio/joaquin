@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ngrok-tunnel'
   spec.add_dependency 'commander', '>= 4.4.0', '< 5.0.0'
   spec.add_dependency 'colorize'
+  spec.add_dependency 'sysinfo'
 
   # Development only
   spec.add_development_dependency 'bundler'
