@@ -11,12 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410190020) do
+ActiveRecord::Schema.define(version: 20170411105541) do
 
   create_table "job_types", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "slug",       default: "", null: false
+    t.string   "name",       default: "", null: false
   end
+
+  add_index "job_types", ["slug"], name: "index_job_types_on_slug", unique: true
 
   create_table "jobs", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -24,14 +28,36 @@ ActiveRecord::Schema.define(version: 20170410190020) do
   end
 
   create_table "nodes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "token",       default: "", null: false
+    t.integer  "status",      default: 0,  null: false
+    t.string   "alias"
+    t.string   "os"
+    t.string   "arch"
+    t.string   "system"
+    t.string   "local_host"
+    t.string   "ip_address"
+    t.string   "shell"
+    t.string   "user"
+    t.string   "home_dir"
+    t.string   "port"
+    t.string   "public_host"
+    t.datetime "last_active"
   end
 
+  add_index "nodes", ["token"], name: "index_nodes_on_token", unique: true
+
   create_table "step_types", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "slug",        default: "", null: false
+    t.string   "name",        default: "", null: false
+    t.string   "script",      default: "", null: false
+    t.string   "plugin_data"
   end
+
+  add_index "step_types", ["slug"], name: "index_step_types_on_slug", unique: true
 
   create_table "steps", force: :cascade do |t|
     t.datetime "created_at", null: false

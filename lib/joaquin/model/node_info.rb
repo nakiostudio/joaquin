@@ -10,9 +10,10 @@ module Joaquin
       @hash = {
         os: sys_info.os,
         arch: sys_info.arch,
-        system: sys_info.to_s,
+        system: sysinfo.impl,
         local_host: "#{host}:#{port}",
         ip_address: sys_info.ipaddress_internal,
+        port: port,
         shell: sys_info.shell,
         user: sys_info.user,
         home_dir: sys_info.home
