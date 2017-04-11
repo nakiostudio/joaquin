@@ -22,16 +22,17 @@ class AddBasicProperties < ActiveRecord::Migration
       t.timestamp :last_active,   null: true
     end
 
+    change_table :job_types do |t|
+      t.string :slug,             null: false, default: ''
+      t.string :name,             null: false, default: ''
+    end
+
     change_table :step_types do |t|
       t.string :slug,             null: false, default: ''
       t.string :name,             null: false, default: ''
       t.string :script,           null: false, default: ''
       t.string :plugin_data,      null: true
-    end
-
-    change_table :job_types do |t|
-      t.string :slug,             null: false, default: ''
-      t.string :name,             null: false, default: ''
+      t.belongs_to :job_type, index: true
     end
 
     # Indexes
