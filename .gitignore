@@ -43,3 +43,5 @@ build/
 # Rails app
 *.log
 *.sqlite3
+app/tmp
+app/public/assets

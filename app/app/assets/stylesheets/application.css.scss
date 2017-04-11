@@ -1,0 +1,9 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body { padding-top: 70px; }
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
