@@ -1,0 +1,8 @@
+<!-- Bradcrumb -->
+<% content_for :breadcrumb_tabs do %>
+  <li><%= link_to t('nodes.breadcrumb.index'), nodes_path %></li>
+  <li class="active"><%= t('nodes.breadcrumb.new') %></li>
+<% end %>
+<%= render 'breadcrumb' %>
+
+<%= render 'form' %>

@@ -6,6 +6,8 @@ en:
     tab_settings: "Settings"
     tab_account: "Account"
     tab_logout: "Logout"
+  breadcrumb:
+    home: "Home"
 
   jobs:
     summary:
@@ -17,11 +19,28 @@ en:
       title: "Could not find any node 😓"
       message: "Node is a machine in charge of running your jobs. Generate a <code>token</code> by clicking on <strong>Create node</strong> and use it whilst launching your node."
       button: "Create node"
-    breadcrumbs:
-      home: "Home"
+    breadcrumb:
       index: "Nodes"
       new: "Create node"
     summary:
       title: "Active nodes"
       placeholder: "No active nodes were found"
+    form:
+      token: "Token"
+      token_desc: "Use this token to pair the node"
+      alias: "Name"
+      alias_desc: "Fill in the name that best describes your node"
+      system: "Type"
+      os: "Operative System"
+      arch: "Architecture"
+      shell: "Shell"
+      user: "User"
+      home_dir: "Home directory"
+      local_host: "Local host"
+      public_host: "Public host"
+      ip_address: "IP address"
+      port: "Port"
+      last_active: "Last time active"
+      submit_create: "Create node"
+      success_message: "The node \"%{node_name}\" has been created successfully."
 
