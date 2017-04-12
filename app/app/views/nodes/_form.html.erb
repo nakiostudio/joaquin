@@ -16,6 +16,9 @@
           <br>
       </div>
       <div class="col-md-6">
+        <% if @node.os.nil? %>
+        <%= render 'help' %>
+        <% else %>
         <div class="form-group">
           <%= f.label t('nodes.form.system') %>
           <p class="form-control-static"><%= @node.system || 'N/A'  %></p>
@@ -60,6 +63,7 @@
           <%= f.label t('nodes.form.last_active') %>
           <p class="form-control-static"><%= @node.last_active || 'N/A'  %></p>
         </div>
+        <% end %>
       </div>
     </div>
   <% end %>
