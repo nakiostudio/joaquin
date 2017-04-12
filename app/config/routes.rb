@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
   devise_for :users
+
   root 'jobs#index'
 
+  resources :nodes, only: [:index, :create, :new, :show, :edit, :update, :destroy]
+
+  # Node API stuff
   namespace :node_api do
 
   end

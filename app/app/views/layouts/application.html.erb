@@ -10,7 +10,19 @@
   <%= render 'navigation_bar' %>
   <div class="container">
     <%= render partial: 'flash_messages', flash: flash %>
-    <%= yield %>
+    <% if user_signed_in? %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= yield %>
+      </div>
+      <div class="col-md-4">
+        <%= render 'jobs/summary' %>
+        <%= render 'nodes/summary' %>
+      </div>
+    </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </div>
 </body>
 </html>

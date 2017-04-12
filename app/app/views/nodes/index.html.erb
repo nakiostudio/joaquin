@@ -1,0 +1,9 @@
+<!-- Bradcrumb -->
+<% content_for :breadcrumb_tabs do %>
+  <li class="active">Nodes</li>
+  <%= link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create node'), new_node_path, class: 'btn btn-success btn-xs pull-right', role: 'button'  %>
+<% end %>
+<%= render 'breadcrumb' %>
+
+<!-- Content -->
+<%= render 'empty' if @nodes.count == 0 %>
