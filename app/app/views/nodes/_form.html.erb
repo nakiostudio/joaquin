@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <%= form_for(@node, url: { action: 'create' }) do |f| %>
+  <%= form_for(@node, url: { action: @target_action }) do |f| %>
     <div class="row">
       <div class="col-md-6">
           <div class="form-group">
@@ -12,11 +12,17 @@
             <%= f.text_field :token, class: 'form-control', readonly: true %>
             <p class="help-block"><%= t('nodes.form.token_desc') %></p>
           </div>
-          <button type="submit" class="btn btn-success btn-block"><%= t('nodes.form.submit_create') %></button>
+          <% if @target_action == 'update' %>
+            <button type="submit" class="btn btn-warning btn-block"><%= t('nodes.form.submit_update') %></button>
+            <p></p>
+            <%= link_to t('nodes.form.submit_delete'), node_path(@node.id), method: 'delete', class: 'btn btn-danger btn-block' %>
+          <% else %>
+            <button type="submit" class="btn btn-success btn-block"><%= t('nodes.form.submit_create') %></button>
+          <% end %>
           <br>
       </div>
       <div class="col-md-6">
-        <% if @node.last_active.nil? %>
+        <% if @node.status != 0 %>
         <%= render 'help' %>
         <% else %>
         <div class="form-group">

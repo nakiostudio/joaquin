@@ -1,7 +1,10 @@
 <!-- Bradcrumb -->
 <% content_for :breadcrumb_tabs do %>
   <li><%= link_to t('nodes.breadcrumb.index'), nodes_path %></li>
-  <li class="active"><%= t('nodes.breadcrumb.new') %></li>
+  <li class="active">
+    <%= t('nodes.breadcrumb.new') if action_name == 'new' %>
+    <%= @node.alias if action_name == 'show' %>
+  </li>
 <% end %>
 <%= render 'breadcrumb' %>
 
