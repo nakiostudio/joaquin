@@ -24,6 +24,11 @@ class NodesController < ApplicationController
     @node = Node.new({ alias: params[:alias], token: generate_hash })
   end
 
+  def show
+    @node = Node.find(params[:id])
+    render 'new'
+  end
+
   private
 
   def node_params

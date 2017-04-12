@@ -16,7 +16,7 @@
           <br>
       </div>
       <div class="col-md-6">
-        <% if @node.os.nil? %>
+        <% if @node.last_active.nil? %>
         <%= render 'help' %>
         <% else %>
         <div class="form-group">

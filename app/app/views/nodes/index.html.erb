@@ -6,4 +6,21 @@
 <%= render 'breadcrumb' %>
 
 <!-- Content -->
-<%= render 'empty' if @nodes.count == 0 %>
+<%= render 'empty' if @nodes.empty? %>
+<% unless @nodes.empty? %>
+  <table class="table table-hover">
+    <% @nodes.each do |node| %>
+      <tr class="row-node" data-node-id="<%= node.id %>">
+        <td>
+          <p>
+            <label><%= node.alias %></label>
+            <% if node.last_active.nil? %>
+            <span class="label label-warning">never paired</span>
+            <% end %>
+          </p>
+          Token <code><%= node.token %></code>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
