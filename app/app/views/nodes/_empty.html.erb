@@ -1,8 +1,7 @@
 <div class="jumbotron">
-  <h2>Could not find any node 😓</h2>
+  <h2><%= t('nodes.jumbo.title') %></h2>
   <br>
-  <p>Node is a machine in charge of running your jobs. Generate a <code>token</code> by clicking on
-  <strong>Create node</strong> and use it whilst launching your node.</p>
+  <p><%= raw(t('nodes.jumbo.message')) %></p>
   <br>
-  <p><%= link_to 'Create node', new_node_path, class: 'btn btn-success btn-lg', role: 'button'  %></p>
+  <p><%= link_to t('nodes.jumbo.button'), new_node_path, class: 'btn btn-success btn-lg', role: 'button'  %></p>
 </div>

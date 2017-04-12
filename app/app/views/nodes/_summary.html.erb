@@ -1,6 +1,10 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Active nodes</div>
+  <div class="panel-heading"><%= t('nodes.summary.title') %></div>
   <div class="panel-body">
-    Panel content
+    <% if @active_nodes.empty? %>
+      <span class="label label-danger"><%= t('nodes.summary.placeholder') %></span>
+    <% else %>
+      Panel content
+    <% end %>
   </div>
 </div>
