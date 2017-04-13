@@ -16,6 +16,9 @@
             <label><%= node.alias %></label>
             <% if node.status == 'unpaired' %>
             <span class="label label-warning">never paired</span>
+            <% elsif node.status == 'online' %>
+            <%= "#{node.os}-#{node.system}-#{node.arch}" %>
+            <span class="label label-success">online</span>
             <% end %>
           </p>
           Token <code><%= node.token %></code>

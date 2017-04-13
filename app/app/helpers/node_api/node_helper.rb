@@ -1,0 +1,2 @@
+module NodeApi::NodeHelper
+end

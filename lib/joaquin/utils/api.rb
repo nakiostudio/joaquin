@@ -25,7 +25,7 @@ module Joaquin
     # Public methods
 
     def register_node(node_info, &completion)
-      parameters = node_info.hash
+      parameters = { node: node_info.hash }
       post(NODE_ENDPOINT_REGISTER_NODE, parameters) do |response|
         completion.call(response)
       end

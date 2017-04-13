@@ -38,12 +38,12 @@
           <p class="form-control-static"><%= @node.arch || 'N/A'  %></p>
         </div>
         <div class="form-group">
-          <%= f.label t('nodes.form.user') %>
-          <p class="form-control-static"><%= @node.user || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
           <%= f.label t('nodes.form.shell') %>
           <p class="form-control-static"><%= @node.shell || 'N/A'  %></p>
+        </div>
+        <div class="form-group">
+          <%= f.label t('nodes.form.user') %>
+          <p class="form-control-static"><%= @node.user || 'N/A'  %></p>
         </div>
         <div class="form-group">
           <%= f.label t('nodes.form.home_dir') %>

@@ -58,7 +58,7 @@ module Joaquin
           # Default options
           options.default \
             port: '4567',
-            server_url: 'http://localhost:9001',
+            server_url: 'http://localhost:3000',
             jobs_directory: 'jobs',
             concurrent_jobs: 1,
             verbose: false

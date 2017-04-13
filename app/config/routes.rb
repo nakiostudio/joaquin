@@ -8,7 +8,14 @@ Rails.application.routes.draw do
 
   # Node API stuff
   namespace :node_api do
-
+    # Register node
+    post 'node' => 'node#register'
+    # Update job
+    post 'job' => 'job#update'
+    # Update step
+    post 'step' => 'step#update'
+    # Submit log
+    post 'step/log' => 'step#submit_log'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

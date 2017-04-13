@@ -23,8 +23,10 @@ en:
       index: "Nodes"
       new: "Create node"
     summary:
-      title: "Active nodes"
+      title: "Online nodes"
       placeholder: "No active nodes were found"
+    row:
+      machine_prefix: "Machine"
     form:
       token: "Token"
       token_desc: "Use this token to pair the node"
