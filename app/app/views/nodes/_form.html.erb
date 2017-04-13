@@ -1,76 +1,82 @@
-<div class="container-fluid">
-  <%= form_for(@node, url: { action: @target_action }) do |f| %>
-    <div class="row">
-      <div class="col-md-6">
-          <div class="form-group">
-            <%= f.label t('nodes.form.alias') %>
-            <%= f.text_field :alias, class: 'form-control' %>
-            <p class="help-block"><%= t('nodes.form.alias_desc') %></p>
-          </div>
-          <div class="form-group">
-            <%= f.label t('nodes.form.token') %>
-            <%= f.text_field :token, class: 'form-control', readonly: true %>
-            <p class="help-block"><%= t('nodes.form.token_desc') %></p>
-          </div>
-          <% if @target_action == 'update' %>
-            <button type="submit" class="btn btn-warning btn-block"><%= t('nodes.form.submit_update') %></button>
-            <p></p>
-            <%= link_to t('nodes.form.submit_delete'), node_path(@node.id), method: 'delete', class: 'btn btn-danger btn-block' %>
-          <% else %>
-            <button type="submit" class="btn btn-success btn-block"><%= t('nodes.form.submit_create') %></button>
-          <% end %>
-          <br>
-      </div>
-      <div class="col-md-6">
-        <% if @node.status == 'unpaired' %>
-        <%= render 'help' %>
+<%= form_for(@node, url: { action: @target_action }) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label t('nodes.form.alias') %>
+          <%= f.text_field :alias, class: 'form-control' %>
+          <p class="help-block"><%= t('nodes.form.alias_desc') %></p>
+        </div>
+        <div class="form-group">
+          <%= f.label t('nodes.form.token') %>
+          <%= f.text_field :token, class: 'form-control', readonly: true %>
+          <p class="help-block"><%= t('nodes.form.token_desc') %></p>
+        </div>
+        <% if @target_action == 'update' %>
+          <button type="submit" class="btn btn-warning btn-block"><%= t('nodes.form.submit_update') %></button>
+          <p></p>
+          <%= link_to t('nodes.form.submit_delete'), node_path(@node.id), method: 'delete', class: 'btn btn-danger btn-block' %>
         <% else %>
-        <div class="form-group">
-          <%= f.label t('nodes.form.system') %>
-          <p class="form-control-static"><%= @node.system || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.os') %>
-          <p class="form-control-static"><%= @node.os || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.arch') %>
-          <p class="form-control-static"><%= @node.arch || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.shell') %>
-          <p class="form-control-static"><%= @node.shell || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.user') %>
-          <p class="form-control-static"><%= @node.user || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.home_dir') %>
-          <p class="form-control-static"><%= @node.home_dir || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.local_host') %>
-          <p class="form-control-static"><%= @node.local_host || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.public_host') %>
-          <p class="form-control-static"><%= @node.public_host || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.ip_address') %>
-          <p class="form-control-static"><%= @node.ip_address || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.port') %>
-          <p class="form-control-static"><%= @node.port || 'N/A'  %></p>
-        </div>
-        <div class="form-group">
-          <%= f.label t('nodes.form.last_active') %>
-          <p class="form-control-static"><%= @node.last_active || 'N/A'  %></p>
-        </div>
+          <button type="submit" class="btn btn-success btn-block"><%= t('nodes.form.submit_create') %></button>
         <% end %>
+        <br>
+    </div>
+    <div class="col-md-6">
+      <%= render 'help' %>
+    </div>
+  </div>
+<% end %>
+<% if @node.status != 'unpaired' %>
+  <h3><%= t('nodes.form.details') %></h3><hr>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label><%= t('nodes.form.system') %></label>
+        <p class="form-control-static"><%= @node.system || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.os') %></label>
+        <p class="form-control-static"><%= @node.os || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.arch') %></label>
+        <p class="form-control-static"><%= @node.arch || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.shell') %></label>
+        <p class="form-control-static"><%= @node.shell || 'N/A'  %></p>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label><%= t('nodes.form.user') %></label>
+        <p class="form-control-static"><%= @node.user || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.home_dir') %></label>
+        <p class="form-control-static"><%= @node.home_dir || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.local_host') %></label>
+        <p class="form-control-static"><%= @node.local_host || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.public_host') %></label>
+        <p class="form-control-static"><%= @node.public_host || 'N/A'  %></p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label><%= t('nodes.form.ip_address') %></label>
+        <p class="form-control-static"><%= @node.ip_address || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.port') %></label>
+        <p class="form-control-static"><%= @node.port || 'N/A'  %></p>
+      </div>
+      <div class="form-group">
+        <label><%= t('nodes.form.last_active') %></label>
+        <p class="form-control-static"><%= @node.last_active || 'N/A'  %></p>
+      </div>
+    </div>
+  </div>
   <% end %>
-</div>

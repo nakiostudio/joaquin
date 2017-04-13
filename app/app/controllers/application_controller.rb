@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   def fetch_summary_items
-    @active_nodes = []
+    @active_nodes = Node.where(status: 'online')
     @jobs = []
   end
 

@@ -28,6 +28,7 @@ en:
     row:
       machine_prefix: "Machine"
     form:
+      details: "Machine details"
       token: "Token"
       token_desc: "Use this token to pair the node"
       alias: "Name"
