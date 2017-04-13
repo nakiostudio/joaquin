@@ -14,7 +14,7 @@
         <td class="row-node" data-node-id="<%= node.id %>">
           <p>
             <label><%= node.alias %></label>
-            <% if node.last_active.nil? %>
+            <% if node.status == 'unpaired' %>
             <span class="label label-warning">never paired</span>
             <% end %>
           </p>

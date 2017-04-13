@@ -22,7 +22,7 @@
           <br>
       </div>
       <div class="col-md-6">
-        <% if @node.status != 0 %>
+        <% if @node.status == 'unpaired' %>
         <%= render 'help' %>
         <% else %>
         <div class="form-group">
