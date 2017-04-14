@@ -8,4 +8,6 @@
 <% end %>
 <%= render 'breadcrumb' %>
 
+<!-- Content -->
 <%= render 'form' %>
+<%= render 'details' if @node.status != 'unpaired' %>
