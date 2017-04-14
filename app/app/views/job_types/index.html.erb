@@ -1,0 +1,20 @@
+<!-- Bradcrumb -->
+<% content_for :breadcrumb_tabs do %>
+  <li class="active"><%= t('job_types.breadcrumb.index') %></li>
+  <%= link_to raw("<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> #{t('job_types.breadcrumb.new')}"), new_job_type_path, class: 'btn btn-success btn-xs pull-right', role: 'button'  %>
+<% end %>
+<%= render 'breadcrumb' %>
+
+<!-- Content -->
+<%= render 'empty' if @job_types.empty? %>
+<% unless @job_types.empty? %>
+  <table class="table table-hover">
+    <% @job_types.each do |job_type| %>
+      <tr>
+        <td class="row-node" data-node-id="<%= job_type.id %>">
+          
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

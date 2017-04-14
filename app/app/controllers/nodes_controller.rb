@@ -4,7 +4,6 @@ class NodesController < ApplicationController
 
   def index
     @nodes = Node.all
-    @active_nodes = []
   end
 
   def create

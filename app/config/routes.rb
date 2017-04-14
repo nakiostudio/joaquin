@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'jobs#index'
 
   resources :nodes, only: [:index, :create, :new, :show, :edit, :update, :destroy]
+  resources :job_types, only: [:index, :create, :new, :show, :edit, :update, :destroy]
 
   # Node API stuff
   namespace :node_api do

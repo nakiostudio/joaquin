@@ -1,6 +1,7 @@
 en:
   navbar:
     tab_manage: "Manage"
+    tab_jobs: "Jobs"
     tab_members: "Members"
     tab_nodes: "Nodes"
     tab_settings: "Settings"
@@ -13,6 +14,15 @@ en:
     summary:
       title: "Jobs"
       placeholder: "No jobs were found"
+
+  job_types:
+    jumbo:
+      title: "You haven't created any job 😯"
+      message: ""
+      button: "Create job"
+    breadcrumb:
+      index: "Jobs"
+      new: "Create job"
 
   nodes:
     jumbo:
@@ -28,7 +38,7 @@ en:
     row:
       machine_prefix: "Machine"
     form:
-      details: "Machine details"
+      details: "Node details"
       token: "Token"
       token_desc: "Use this token to pair the node"
       alias: "Name"
@@ -47,9 +57,9 @@ en:
       submit_create: "Create node"
       submit_update: "Update node"
       submit_delete: "Delete node"
-      success_message_create: "The node \"%{node_name}\" has been created successfully."
-      success_message_update: "The node \"%{node_name}\" has been updated successfully."
-      success_message_delete: "The node \"%{node_name}\" has been deleted successfully."
+      success_message_create: "🎉 The node \"%{node_name}\" has been created successfully"
+      success_message_update: "🎉 The node \"%{node_name}\" has been updated successfully"
+      success_message_delete: "🗑 The node \"%{node_name}\" has been deleted successfully"
     help:
       title: "Running your node"
       message: "You can create a node using the same Ruby gem used to install and deploy this server.<br><br>Play with the command and check the options available with the help argument."
