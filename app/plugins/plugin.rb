@@ -55,23 +55,19 @@ class Plugin
 
   # Methods to be overriden
 
-  def name
+  def self.name
     raise 'name method should be overriden by your plugin subclass'
   end
 
-  def description
+  def self.description
     raise 'description method should be overriden by your plugin subclass'
   end
 
-  def author
+  def self.author
     raise 'author method should be overriden by your plugin subclass'
   end
 
-  def category
-    raise 'category method should be overriden by your plugin subclass'
-  end
-
-  def fields
+  def self.fields
     raise 'fields method should be overriden by your plugin subclass'
   end
 

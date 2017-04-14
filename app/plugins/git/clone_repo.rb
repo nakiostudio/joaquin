@@ -1,22 +1,18 @@
 class CloneRepo < Plugin
 
-  def name
+  def self.name
     return 'Clone Git repository'
   end
 
-  def description
+  def self.description
     return 'Clones the given Git repository checking out the branch specified'
   end
 
-  def author
+  def self.author
     return 'Carlos Vidal'
   end
 
-  def category
-    return 'version_control'
-  end
-
-  def fields
+  def self.fields
     return [
       Field.string(
         id: 'repository_address',
