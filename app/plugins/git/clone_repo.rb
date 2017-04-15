@@ -21,9 +21,7 @@ class CloneRepo < Plugin
           'Address of the Git repository (http or ssh). Note: if this job is going'\
           'to be triggered by a webhook that provides repository url and branch then'\
           'filling this field is not required',
-        default_value: nil,
         optional: true,
-        validate: nil
       ),
       Field.string(
         id: 'branch',
@@ -32,9 +30,7 @@ class CloneRepo < Plugin
           'Brand to checkout once the repository is cloned. Note: if this job is going'\
           'to be triggered by a webhook that provides repository url and branch then'\
           'filling this field is not required',
-        default_value: nil,
         optional: true,
-        validate: nil
       )
     ]
   end
