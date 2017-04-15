@@ -1,3 +1,6 @@
+set -v
+set -e
+
 git clone <%= @repository_address || '$GIT_REPOSITORY' %> tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 git fetch --all --prune
 git checkout <%= @branch || '$GIT_BRANCH' %>
