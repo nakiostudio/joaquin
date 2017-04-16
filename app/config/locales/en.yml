@@ -23,6 +23,8 @@ en:
     breadcrumb:
       index: "Jobs"
       new: "Create job"
+    plugins:
+      title: "Step type"
 
   nodes:
     jumbo:

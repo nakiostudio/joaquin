@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= t('job_types.plugins.title') %>
+  </div>
+  <div class="list-group">
+    <% @categories.each do |subcategory| %>
+      <a class="list-group-item row-category" data-path="<%= subcategory.category_path %>" href="#"><strong><%= subcategory.name %></strong> <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span></a>
+    <% end %>
+    <% @plugins.each do |plugin| %>
+      <a class="list-group-item row-plugin" href="#"><%= plugin.humanize  %></span></a>
+    <% end %>
+  </div>
+</div>

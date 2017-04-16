@@ -1,0 +1,26 @@
+<!-- Bradcrumb -->
+<% content_for :breadcrumb_tabs do %>
+  <li><%= link_to t('job_types.breadcrumb.index'), job_types_path %></li>
+  <li class="active">
+    <%= t('job_types.breadcrumb.new') if action_name == 'new' %>
+    <%= @job_type.name if action_name == 'show' %>
+  </li>
+<% end %>
+<%= render 'breadcrumb' %>
+
+<%= form_for(@job_type, url: { action: @target_action}) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= render 'plugins_help' %>
+    </div>
+    <div class="col-md-6">
+      <%= render 'plugins' %>
+    </div>
+  </div>
+<% end %>
+
+<!--
+<button type="button" class="btn btn-default btn-block">
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add step
+</button>
+-->
