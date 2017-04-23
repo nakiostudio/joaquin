@@ -9,8 +9,6 @@ class JobTypesController < ApplicationController
   def new
     @job_type = JobType.new
     @target_action = 'create'
-    @categories = Rails.application.config.root_category.subcategories
-    @plugins = Rails.application.config.root_category.plugins
   end
 
 end

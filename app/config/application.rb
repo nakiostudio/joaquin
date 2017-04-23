@@ -19,5 +19,10 @@ module RubyRailsSample
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Convert params from foo_bar to FooBar rendering react components
+    config.react.camelize_props = true
+    # npm packages
+    config.assets.paths << Rails.root.join('node_modules')
   end
 end

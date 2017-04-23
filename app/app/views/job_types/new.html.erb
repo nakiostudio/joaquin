@@ -14,7 +14,7 @@
       <%= render 'plugins_help' %>
     </div>
     <div class="col-md-6">
-      <%= render 'plugins' %>
+      <%= react_component('PluginPicker', category_path: 'root') %>
     </div>
   </div>
 <% end %>
