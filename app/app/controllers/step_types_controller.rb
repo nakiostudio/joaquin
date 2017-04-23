@@ -34,7 +34,9 @@ class StepTypesController < ApplicationController
 
   def category_payload(category)
     return {
-      plugins: category.plugins,
+      plugins: category.plugins.map { |c|
+        { name: c.humanize, path: "#{category.category_path}#{c}" }
+      },
       subcategories: category.subcategories.map { |c|
         { name: c.name, path: c.category_path }
       }
