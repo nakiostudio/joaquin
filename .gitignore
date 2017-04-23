@@ -45,3 +45,4 @@ build/
 *.sqlite3
 app/tmp
 app/public/assets
+app/node_modules

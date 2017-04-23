@@ -1,0 +1,25 @@
+{
+  "name": "joaquin",
+  "version": "0.1.0",
+  "description": "The Ruby cousin of Jenkins",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakiostudio/joaquin.git"
+  },
+  "author": "Carlos Vidal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nakiostudio/joaquin/issues"
+  },
+  "homepage": "https://github.com/nakiostudio/joaquin#readme",
+  "dependencies": {
+    "whatwg-fetch": "^2.0.3"
+  }
+}

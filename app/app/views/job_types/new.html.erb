@@ -1,4 +1,4 @@
-<!-- Bradcrumb -->
+<!-- Breadcrumb -->
 <% content_for :breadcrumb_tabs do %>
   <li><%= link_to t('job_types.breadcrumb.index'), job_types_path %></li>
   <li class="active">
@@ -14,7 +14,7 @@
       <%= render 'plugins_help' %>
     </div>
     <div class="col-md-6">
-      <%= render 'plugins' %>
+      <%= react_component('PluginPicker', category_path: 'root') %>
     </div>
   </div>
 <% end %>
