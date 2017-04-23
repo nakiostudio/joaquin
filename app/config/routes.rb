@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :nodes, only: [:index, :create, :new, :show, :edit, :update, :destroy]
   resources :job_types, only: [:index, :create, :new, :show, :edit, :update, :destroy]
 
+  get 'step_types/category/:category_path' => 'step_types#category'
+
   # Node API stuff
   namespace :node_api do
     # Register node
