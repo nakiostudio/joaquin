@@ -1,6 +1,27 @@
+class PluginPickerHelp extends React.Component {
+  render() {
+    return (
+      <div className="col-md-6">
+        <label>{ I18n.t('job_types.plugins.help.title') }</label>
+        <p>{ I18n.t('job_types.plugins.help.message') }</p>
+      </div>
+    );
+  }
+}
+
+class PluginPickerHeader extends React.Component {
+  render() {
+    return (
+      <div className="panel-heading">
+        { I18n.t('job_types.plugins.title') }
+      </div>
+    );
+  }
+}
+
 class PluginPickerEntry extends React.Component {
   render() {
-    const data = this.props.data
+    const data = this.props.data;
     const style = { 'cursor': 'pointer' };
     if (this.props.type == 'plugin') {
       return (
@@ -18,7 +39,6 @@ class PluginPickerEntry extends React.Component {
 PluginPickerEntry.propTypes = {
   data: React.PropTypes.any,
   type: React.PropTypes.string,
-  completion: React.PropTypes.any,
   onClick: React.PropTypes.any
 };
 
@@ -41,32 +61,37 @@ class PluginPicker extends React.Component {
     });
   }
 
-  render() {
+  pickerBody() {
     if (!this.state.category) {
       return (
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            { I18n.t('job_types.plugins.title') }
-          </div>
-        </div>
+        <div className="list-group"></div>
       );
     }
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          { I18n.t('job_types.plugins.title') }
-        </div>
-        <div className="list-group">
-          { this.state.category.subcategories.map(category => (
-            <PluginPickerEntry data={category} type="category" onClick={() => {
-              this.retrieveCategory(category.path);
-            }} />
-          )) }
-          { this.state.category.plugins.map(plugin => (
-            <PluginPickerEntry data={plugin} type="plugin" onClick={() => {
-              console.log(plugin.path);
-            }}/>
-          )) }
+      <div className="list-group">
+        { this.state.category.subcategories.map(category => (
+          <PluginPickerEntry data={category} type="category" onClick={() => {
+            this.retrieveCategory(category.path);
+          }} />
+        )) }
+        { this.state.category.plugins.map(plugin => (
+          <PluginPickerEntry data={plugin} type="plugin" onClick={() => {
+            console.log(plugin.path);
+          }}/>
+        )) }
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="row">
+        <PluginPickerHelp />
+        <div className="col-md-6">
+          <div className="panel panel-default">
+            <PluginPickerHeader/>
+            { this.pickerBody() }
+          </div>
         </div>
       </div>
     );

@@ -25,6 +25,10 @@ en:
       new: "Create job"
     plugins:
       title: "Step type"
+      add_step_button: "Add Step"
+      help:
+        title: "Adding a step"
+        message: "A job is made of many steps. To make your life easier you can select one of the step types or templates available, if not, you can always use the \"Bash script\" step type to have absolute control."
 
   nodes:
     jumbo:
@@ -64,5 +68,5 @@ en:
       success_message_delete: "🗑 The node \"%{node_name}\" has been deleted successfully"
     help:
       title: "Running your node"
-      message: "You can create a node using the same Ruby gem used to install and deploy this server.<br><br>Play with the command and check the options available with the help argument."
+      message: "You can create a node using the same Ruby gem used to install and deploy this server.<br/><br/>Play with the command and check the options available with the help argument."
 
