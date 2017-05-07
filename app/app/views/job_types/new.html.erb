@@ -7,17 +7,7 @@
   </li>
 <% end %>
 <%= render 'breadcrumb' %>
-
-<%= form_for(@job_type, url: { action: @target_action}) do |f| %>
-  <div class="row">
-    <div class="col-md-6">
-      <%= render 'plugins_help' %>
-    </div>
-    <div class="col-md-6">
-      <%= react_component('PluginPicker', category_path: 'root') %>
-    </div>
-  </div>
-<% end %>
+<%= react_component('JobTypeForm', id: @job_type.id, editable: true) %>
 
 <!--
 <button type="button" class="btn btn-default btn-block">

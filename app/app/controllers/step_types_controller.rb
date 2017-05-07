@@ -1,46 +1,57 @@
 class StepTypesController < ApplicationController
 
-  def category
-    path = params[:category_path]
-    paths = path.split('/').reverse
-    path_touched = ''
-    category = Rails.application.config.root_category
-
-    # Search right category among current category subcategories
-    while path != 'root' && !paths.empty? && !category.nil? do
-      path_touched << "#{paths.pop}/"
-      categories = category.subcategories.select { |c| c.category_path == path_touched }
-
-      # If no category has been found break loop
-      if categories.empty?
-        category = nil
-        break
-      end
-
-      # Found
-      category = categories.first
-    end
-
-    # Return 404 if no category has been found
-    if category.nil?
+  def create
+    if params[:job_type_id].nil?
       render status: 404, json: {}
       return
     end
 
-    render status: 200, json: category_payload(category)
+    if params[:plugin_path].nil?
+      render status: 400, json: {}
+      return
+    end
+
+    job_type = JobType.find(params[:job_type_id])
+
+    if job_type.nil?
+      render status: 404, json: {}
+      return
+    end
+
+    plugin_id = params[:plugin_path].split('/').last
+    name = plugin_id.humanize
+    slug = "#{name.dup.parameterize}-#{Time.now.to_i}"
+    step_type = StepType.new({slug: slug, name: name, plugin_path: params[:plugin_path]})
+    job_type.step_types << step_type
+    unless step_type.save && job_type.save
+      render status: 400, json: {}
+      return
+    end
+
+    render status: 201, json: job_type.payload
   end
 
-  private
+  def update
 
-  def category_payload(category)
-    return {
-      plugins: category.plugins.map { |c|
-        { name: c.humanize, path: "#{category.category_path}#{c}" }
-      },
-      subcategories: category.subcategories.map { |c|
-        { name: c.name, path: c.category_path }
-      }
-    }
+  end
+
+  def destroy
+    job_type = JobType.find(params[:job_type_id])
+    step_type = StepType.find(params[:step_type_id])
+
+    if job_type.nil? || step_type.nil?
+      render status: 404, json: {}
+      return
+    end
+
+    step_type.destroy
+
+    unless job_type.save
+      render status: 400, json: {}
+      return
+    end
+
+    render status: 200, json: job_type.payload()
   end
 
 end
