@@ -6,8 +6,12 @@ Rails.application.routes.draw do
 
   resources :nodes, only: [:index, :create, :new, :show, :edit, :update, :destroy]
   resources :job_types, only: [:index, :create, :new, :show, :edit, :update, :destroy]
+  resources :plugins, only: [:show]
 
-  get 'step_types/category/:category_path' => 'step_types#category'
+  # Step types
+  post 'job_types/:job_type_id/step_types' => 'step_types#create'
+  put 'job_types/:job_type_id/step_types/:step_type_id' => 'step_types#update'
+  delete 'job_types/:job_type_id/step_types/:step_type_id' => 'step_types#destroy'
 
   # Node API stuff
   namespace :node_api do

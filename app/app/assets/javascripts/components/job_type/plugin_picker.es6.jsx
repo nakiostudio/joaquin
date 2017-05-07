@@ -1,24 +1,3 @@
-class PluginPickerHelp extends React.Component {
-  render() {
-    return (
-      <div className="col-md-6">
-        <label>{ I18n.t('job_types.plugins.help.title') }</label>
-        <p>{ I18n.t('job_types.plugins.help.message') }</p>
-      </div>
-    );
-  }
-}
-
-class PluginPickerHeader extends React.Component {
-  render() {
-    return (
-      <div className="panel-heading">
-        { I18n.t('job_types.plugins.title') }
-      </div>
-    );
-  }
-}
-
 class PluginPickerEntry extends React.Component {
   render() {
     const data = this.props.data;
@@ -51,14 +30,9 @@ class PluginPicker extends React.Component {
   }
 
   componentDidMount() {
-    this.retrieveCategory(this.props.categoryPath);
-  }
-
-  retrieveCategory(path) {
-    const URL = '/step_types/category/' + path;
-    fetch(URL).then(res => res.json()).then(json => {
-      this.setState({category: json});
-    });
+    Api.retrievePluginsCategory(this.props.categoryPath, json => (
+      this.setState({category: json})
+    ));
   }
 
   pickerBody() {
@@ -70,14 +44,16 @@ class PluginPicker extends React.Component {
     return (
       <div className="list-group">
         { this.state.category.subcategories.map(category => (
-          <PluginPickerEntry data={category} type="category" onClick={() => {
-            this.retrieveCategory(category.path);
-          }} />
+          <PluginPickerEntry key={category.path} data={category} type="category" onClick={() => {
+            Api.retrievePluginsCategory(category.path, json => (
+              this.setState({category: json})
+            ));
+          }.bind(this)} />
         )) }
         { this.state.category.plugins.map(plugin => (
-          <PluginPickerEntry data={plugin} type="plugin" onClick={() => {
-            console.log(plugin.path);
-          }}/>
+          <PluginPickerEntry key={plugin.path} data={plugin} type="plugin" onClick={() => {
+            Api.createStepType(this.props.data.id, plugin.path, this.props.onSelection)
+          }.bind(this)}/>
         )) }
       </div>
     );
@@ -86,12 +62,14 @@ class PluginPicker extends React.Component {
   render() {
     return (
       <div className="row">
-        <PluginPickerHelp />
         <div className="col-md-6">
-          <div className="panel panel-default">
-            <PluginPickerHeader/>
+          <label>{ I18n.t('job_types.plugins.help.title') }</label>
+          <p>{ I18n.t('job_types.plugins.help.message') }</p>
+        </div>
+        <div className="col-md-6">
+          <JoaquinPanel title={ I18n.t("job_types.plugins.title") }>
             { this.pickerBody() }
-          </div>
+          </JoaquinPanel>
         </div>
       </div>
     );
@@ -99,5 +77,7 @@ class PluginPicker extends React.Component {
 }
 
 PluginPicker.propTypes = {
-  categoryPath: React.PropTypes.string
+  data: React.PropTypes.any,
+  categoryPath: React.PropTypes.string,
+  onSelection: React.PropTypes.any
 };

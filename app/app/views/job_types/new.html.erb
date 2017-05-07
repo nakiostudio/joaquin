@@ -7,7 +7,7 @@
   </li>
 <% end %>
 <%= render 'breadcrumb' %>
-<%= react_component('JobTypeForm') %>
+<%= react_component('JobTypeForm', id: @job_type.id, editable: true) %>
 
 <!--
 <button type="button" class="btn btn-default btn-block">

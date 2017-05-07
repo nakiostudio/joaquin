@@ -29,6 +29,16 @@ en:
       help:
         title: "Adding a step"
         message: "A job is made of many steps. To make your life easier you can select one of the step types or templates available, if not, you can always use the \"Bash script\" step type to have absolute control."
+    description:
+      name: "Job name"
+      description: "An unique and descriptive name to identify this job."
+    environment:
+      title: "Environment variables"
+      entry:
+        key: "Variable name"
+        value: "Variable value"
+    step_types:
+      remove: "Remove"
 
   nodes:
     jumbo:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411105541) do
+ActiveRecord::Schema.define(version: 20170507130003) do
 
   create_table "job_types", force: :cascade do |t|
     t.datetime "created_at",              null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170411105541) do
     t.string   "script",      default: "", null: false
     t.string   "plugin_data"
     t.integer  "job_type_id"
+    t.string   "plugin_path"
   end
 
   add_index "step_types", ["job_type_id"], name: "index_step_types_on_job_type_id"

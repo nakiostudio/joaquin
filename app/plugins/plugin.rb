@@ -71,6 +71,18 @@ module Plugins
       return Field.new(options)
     end
 
+    def payload
+      return {
+        id: @id,
+        type: @type,
+        name: @name,
+        description: @description,
+        default_value: @default_value,
+        optional: @optional,
+        validate: @validate
+      }
+    end
+
   end
 
   class Plugin
@@ -100,6 +112,15 @@ module Plugins
     end
 
     # Internal methods
+
+    def self.payload
+      return {
+        name: self.name,
+        description: self.description,
+        author: self.author,
+        fields: self.fields.map { |f| f.payload() }
+      }
+    end
 
     def self.render_script(options)
       plugin = self.class.new(options)
