@@ -21,18 +21,20 @@ class JobTypeDetails extends JobTypeComponent {
   render() {
     const name = this.state.data ? this.state.data.name : "";
     return (
-      <div>
-        <JoaquinField
-          type="string"
-          editable={this.props.editable}
-          title={I18n.t("job_types.description.name")}
-          description={I18n.t("job_types.description.description")}
-          value={name}
-          onChange={event => (
-            this.updateName(event.target.value)
-          )}
-        />
-      </div>
+      <JoaquinPanel title={I18n.t("job_types.details.title")}>
+        <div className="panel-body">
+          <JoaquinField
+            type="string"
+            editable={this.props.editable}
+            title={I18n.t("job_types.details.name")}
+            description={I18n.t("job_types.details.description")}
+            value={name}
+            onChange={event => (
+              this.updateName(event.target.value)
+            )}
+          />
+        </div>
+      </JoaquinPanel>
     );
   }
 }

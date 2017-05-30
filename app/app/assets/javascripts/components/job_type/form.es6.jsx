@@ -26,7 +26,7 @@ class JobTypeForm extends JobTypeComponent {
   footer() {
     if (this.state.showPicker) {
       return (
-        <PluginPicker categoryPath="root" data={this.state.data} onSelection={this.subcomponentDidUpdateData.bind(this)}/>
+        <PluginPicker store={this.store} categoryPath="root"/>
       );
     }
     return (

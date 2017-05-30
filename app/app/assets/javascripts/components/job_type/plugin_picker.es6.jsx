@@ -21,14 +21,7 @@ PluginPickerEntry.propTypes = {
   onClick: React.PropTypes.any
 };
 
-class PluginPicker extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      category: null
-    };
-  }
-
+class PluginPicker extends JobTypeComponent {
   componentDidMount() {
     Api.retrievePluginsCategory(this.props.categoryPath, json => (
       this.setState({category: json})
@@ -52,7 +45,9 @@ class PluginPicker extends React.Component {
         )) }
         { this.state.category.plugins.map(plugin => (
           <PluginPickerEntry key={plugin.path} data={plugin} type="plugin" onClick={() => {
-            Api.createStepType(this.props.data.id, plugin.path, this.props.onSelection)
+            Api.createStepType(this.state.data.id, plugin.path, data => (
+              this.store.dispatch({type: JobTypeAction.updated, data: data})
+            ));
           }.bind(this)}/>
         )) }
       </div>
@@ -77,7 +72,6 @@ class PluginPicker extends React.Component {
 }
 
 PluginPicker.propTypes = {
-  data: React.PropTypes.any,
-  categoryPath: React.PropTypes.string,
-  onSelection: React.PropTypes.any
+  store: React.PropTypes.any,
+  categoryPath: React.PropTypes.string
 };
