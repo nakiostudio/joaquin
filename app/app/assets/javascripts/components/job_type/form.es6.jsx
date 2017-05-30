@@ -12,20 +12,7 @@ AddStepButton.propTypes = {
   onClick: React.PropTypes.any
 };
 
-class JobTypeForm extends React.Component {
-  constructor() {
-    super();
-
-    // Redux setup
-    this.store = jobTypeStore;
-    this.unsubscribe = this.store.subscribe(() => {
-      this.setState(Object.assign({}, this.state, this.store.getState()))
-    });
-
-    // State
-    this.state = this.store.getState();
-  }
-
+class JobTypeForm extends JobTypeComponent {
   componentWillMount() {
     if (this.props.id) {
       Api.getJobType(this.props.id, data => (
@@ -57,7 +44,7 @@ class JobTypeForm extends React.Component {
     step_types = this.state.data ? this.state.data.step_types : [];
     return (
       <div>
-        <JobTypeDescription data={this.state.data} editable={this.props.editable} onChange={this.subcomponentDidUpdateData.bind(this)}/>
+        <JobTypeDetails editable={this.props.editable} store={this.store}/>
         { step_types.map(step_type => (
           <StepType key={step_type.id} data={step_type} jobTypeId={this.state.data.id} onChange={this.subcomponentDidUpdateData.bind(this)}/>
         )) }

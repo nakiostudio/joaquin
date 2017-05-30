@@ -28,7 +28,13 @@ class StepType extends React.Component {
       <JoaquinPanel title={this.state.data.plugin.name} button={this.deleteStepButton()}>
         <div className="panel-body">
           { this.state.data.plugin.fields.map(field => (
-            <JoaquinField key={field.id} type={field.type} title={field.name} description={field.description} value={field.default_value} />
+            <JoaquinField
+              key={field.id}
+              type={field.type}
+              title={field.name}
+              description={field.description}
+              value={field.default_value}
+            />
           )) }
         </div>
       </JoaquinPanel>

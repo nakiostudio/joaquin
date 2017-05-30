@@ -19,7 +19,7 @@ class JobTypesController < ApplicationController
       return
     end
 
-    render status: 201, json: job_type_payload(job_type)
+    render status: 201, json: job_type_params(job_type)
   end
 
   def update

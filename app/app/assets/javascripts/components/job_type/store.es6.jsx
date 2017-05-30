@@ -30,13 +30,13 @@ const initialState = {
 const jobTypeStore = createStore((state, action) => {
   switch (action.type) {
     case JobTypeAction.loading:
-      return Object.assign({}, state, { loading: true });
+      return Object.assign(state, { loading: true });
     case JobTypeAction.updated:
-      return Object.assign({}, state, { loading: false, data: action.data });
+      return Object.assign(state, { loading: false, data: action.data });
     case JobTypeAction.showPicker:
-      return Object.assign({}, state, { showPicker: true });
+      return Object.assign(state, { showPicker: true });
     case JobTypeAction.hidePicker:
-      return Object.assign({}, state, { showPicker: false });
+      return Object.assign(state, { showPicker: false });
   }
   return initialState;
 }, window.STATE_FROM_SERVER);
