@@ -15,17 +15,22 @@ AddStepButton.propTypes = {
 class JobTypeForm extends React.Component {
   constructor() {
     super();
-    this.state = {
-      showPicker: false,
-      data: null
-    };
+
+    // Redux setup
+    this.store = jobTypeStore;
+    this.unsubscribe = this.store.subscribe(() => {
+      this.setState(Object.assign({}, this.state, this.store.getState()))
+    });
+
+    // State
+    this.state = this.store.getState();
   }
 
   componentWillMount() {
     if (this.props.id) {
       Api.getJobType(this.props.id, data => (
-         this.setState({data: data})
-      ))
+        this.store.dispatch({type: JobTypeAction.updated, data: data})
+      ));
       return;
     }
     this.setState({data: null});
@@ -38,9 +43,9 @@ class JobTypeForm extends React.Component {
       );
     }
     return (
-      <AddStepButton onClick={() => {
-        this.setState({showPicker: true});
-      }}/>
+      <AddStepButton onClick={() => (
+        this.store.dispatch({type: JobTypeAction.showPicker})
+      )}/>
     );
   }
 

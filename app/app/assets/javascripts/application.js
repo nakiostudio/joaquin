@@ -4,7 +4,8 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
-//= require components
 //= require whatwg-fetch/fetch
+//= require redux/dist/redux
 //= require i18n/translations
+//= require components
 //= require_tree .
