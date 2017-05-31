@@ -11,11 +11,12 @@ class StepType extends React.Component {
   }
 
   deleteStepButton() {
+    const onClick = () => {
+      Api.deleteStepType(this.props.jobTypeId, this.state.data.id, this.props.onChange)
+    }
     return (
-      <button type="button" className="btn btn-xs btn-danger pull-right" onClick={() => {
-        Api.deleteStepType(this.props.jobTypeId, this.state.data.id, this.props.onChange)
-      }}>
-        { I18n.t("job_types.step_types.remove") }
+      <button type="button" className="btn btn-xs btn-default pull-right" onClick={onClick}>
+        <i className="glyphicon glyphicon-trash"></i> { I18n.t("job_types.step_types.remove") }
       </button>
     );
   }

@@ -33,11 +33,7 @@ en:
       title: "Job type details"
       name: "Job name"
       description: "An unique and descriptive name to identify this job."
-    environment:
-      title: "Environment variables"
-      entry:
-        key: "Variable name"
-        value: "Variable value"
+      save: "Save"
     step_types:
       remove: "Remove"
 

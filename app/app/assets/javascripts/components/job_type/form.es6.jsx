@@ -37,7 +37,7 @@ class JobTypeForm extends JobTypeComponent {
   }
 
   subcomponentDidUpdateData(data) {
-    this.setState({data: data})
+    this.store.dispatch({type: JobTypeAction.updated, data: data})
   }
 
   render() {

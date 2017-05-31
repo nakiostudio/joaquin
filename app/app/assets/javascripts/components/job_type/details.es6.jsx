@@ -18,10 +18,18 @@ class JobTypeDetails extends JobTypeComponent {
     });
   }
 
+  saveDetailsButton() {
+    return (
+      <button type="button" className="btn btn-xs btn-default pull-right" onClick={() => {}}>
+        <i className="glyphicon glyphicon-floppy-disk"></i> { I18n.t("job_types.details.save") }
+      </button>
+    );
+  }
+
   render() {
     const name = this.state.data ? this.state.data.name : "";
     return (
-      <JoaquinPanel title={I18n.t("job_types.details.title")}>
+      <JoaquinPanel title={I18n.t("job_types.details.title")} button={this.saveDetailsButton()}>
         <div className="panel-body">
           <JoaquinField
             type="string"
@@ -33,6 +41,8 @@ class JobTypeDetails extends JobTypeComponent {
               this.updateName(event.target.value)
             )}
           />
+        </div>
+        <div className="panel-footer">
         </div>
       </JoaquinPanel>
     );
