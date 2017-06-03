@@ -35,6 +35,7 @@ en:
       save: "Save"
       add_step: "Add Step"
     step_types:
+      save: "Save"
       remove: "Remove"
 
   nodes:

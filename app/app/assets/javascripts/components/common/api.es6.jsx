@@ -29,8 +29,15 @@ class Api {
   }
 
   static createStepType(jobTypeId, pluginPath, completion) {
-    parameters = { plugin_path: pluginPath }
+    parameters = { plugin_path: pluginPath };
     Api.request('/job_types/' + jobTypeId + '/step_types', 'POST', parameters)
+      .then(res => res.json())
+      .then(completion)
+  }
+
+  static updateStepType(jobTypeId, stepTypeId, fields, completion) {
+    parameters = { plugin_data: fields };
+    Api.request('/job_types/' + jobTypeId + '/step_types/' + stepTypeId, 'PUT', parameters)
       .then(res => res.json())
       .then(completion)
   }

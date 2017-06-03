@@ -4,37 +4,43 @@ class StepType extends React.Component {
     this.state = {
       data: null
     };
+    this.fields = {};
   }
 
-  componentDidMount() {
-    this.setState({data: this.props.data});
-  }
-
-  deleteStepButton() {
-    const onClick = () => {
-      Api.deleteStepType(this.props.jobTypeId, this.state.data.id, this.props.onChange)
-    }
+  buttons() {
+    const saveOnClick = () => {
+      Api.updateStepType(this.props.jobTypeId, this.props.data.id, this.fields, this.props.onChange)
+    };
+    const removeOnClick = () => {
+      Api.deleteStepType(this.props.jobTypeId, this.props.data.id, this.props.onChange)
+    };
     return (
-      <button type="button" className="btn btn-xs btn-default pull-right" onClick={onClick}>
-        <i className="glyphicon glyphicon-trash"></i> { I18n.t("job_types.step_types.remove") }
-      </button>
+      <div className="btn-group btn-group-xs pull-right">
+        <button type="button" className="btn btn-xs btn-default" onClick={saveOnClick}>
+          <i className="glyphicon glyphicon-floppy-disk"></i> { I18n.t("job_types.step_types.save") }
+        </button>
+        <button type="button" className="btn btn-xs btn-default" onClick={removeOnClick}>
+          <i className="glyphicon glyphicon-trash"></i> { I18n.t("job_types.step_types.remove") }
+        </button>
+      </div>
     );
   }
 
   render() {
-    if (!this.state.data) {
-      return null;
-    }
+    console.log(this.props.data);
     return (
-      <JoaquinPanel title={this.state.data.plugin.name} button={this.deleteStepButton()}>
+      <JoaquinPanel title={this.props.data.plugin.name} button={this.buttons()}>
         <div className="panel-body">
-          { this.state.data.plugin.fields.map(field => (
+          { this.props.data.plugin.fields.map(field => (
             <JoaquinField
               key={field.id}
               type={field.type}
               title={field.name}
               description={field.description}
-              value={field.default_value}
+              value={this.props.data.plugin.data[field.id] || field.default_value}
+              onChange={event => (
+                this.fields = Object.assign(this.fields, {[field.id]: event.target.value})
+              )}
             />
           )) }
         </div>

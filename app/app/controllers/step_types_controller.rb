@@ -32,7 +32,21 @@ class StepTypesController < ApplicationController
   end
 
   def update
+    job_type = JobType.find(params[:job_type_id])
+    step_type = StepType.find(params[:step_type_id])
 
+    if job_type.nil? || step_type.nil?
+      render status: 404, json: {}
+      return
+    end
+
+    step_type.plugin_data = params[:plugin_data].to_json
+
+    unless step_type.save
+      render status: 400, json: {}
+    end
+
+    render status: 200, json: job_type.payload()
   end
 
   def destroy
