@@ -45,9 +45,10 @@ class PluginPicker extends JobTypeComponent {
         )) }
         { this.state.category.plugins.map(plugin => (
           <PluginPickerEntry key={plugin.path} data={plugin} type="plugin" onClick={() => {
-            Api.createStepType(this.state.data.id, plugin.path, data => (
-              this.store.dispatch({type: JobTypeAction.updated, data: data})
-            ));
+            Api.createStepType(this.state.data.id, plugin.path, data => {
+              this.store.dispatch({type: JobTypeAction.updated, data: data});
+              this.store.dispatch({type: JobTypeAction.hidePicker});
+            });
           }.bind(this)}/>
         )) }
       </div>

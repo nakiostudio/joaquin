@@ -48,4 +48,3 @@ StepType.propTypes = {
   data: React.PropTypes.any,
   onChange: React.PropTypes.any
 };
-

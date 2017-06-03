@@ -25,7 +25,6 @@ en:
       new: "Create job"
     plugins:
       title: "Step type"
-      add_step_button: "Add Step"
       help:
         title: "Adding a step"
         message: "A job is made of many steps. To make your life easier you can select one of the step types or templates available, if not, you can always use the \"Bash script\" step type to have absolute control."
@@ -34,6 +33,7 @@ en:
       name: "Job name"
       description: "An unique and descriptive name to identify this job."
       save: "Save"
+      add_step: "Add Step"
     step_types:
       remove: "Remove"
 

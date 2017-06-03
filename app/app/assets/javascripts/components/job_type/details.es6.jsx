@@ -19,9 +19,24 @@ class JobTypeDetails extends JobTypeComponent {
   }
 
   saveDetailsButton() {
+    const onClick = () => {
+      console.log();
+    };
     return (
-      <button type="button" className="btn btn-xs btn-default pull-right" onClick={() => {}}>
+      <button type="button" className="btn btn-xs btn-default pull-right" onClick={onClick}>
         <i className="glyphicon glyphicon-floppy-disk"></i> { I18n.t("job_types.details.save") }
+      </button>
+    );
+  }
+
+  addStepButton() {
+    const onClick = () => {
+      this.store.dispatch({type: JobTypeAction.showPicker})
+    };
+    const disabled = this.state.showPicker ? "disabled" : "";
+    return (
+      <button type="button" className={"btn btn-xs btn-default " + disabled} onClick={onClick}>
+        <i className="glyphicon glyphicon-plus"></i> { I18n.t("job_types.details.add_step") }
       </button>
     );
   }
@@ -43,6 +58,7 @@ class JobTypeDetails extends JobTypeComponent {
           />
         </div>
         <div className="panel-footer">
+          { this.addStepButton() }
         </div>
       </JoaquinPanel>
     );

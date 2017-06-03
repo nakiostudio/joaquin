@@ -1,17 +1,3 @@
-class AddStepButton extends React.Component {
-  render() {
-    return (
-      <button type="button" className="btn btn-default btn-block" onClick={this.props.onClick}>
-        { I18n.t('job_types.plugins.add_step_button') }
-      </button>
-    );
-  }
-}
-
-AddStepButton.propTypes = {
-  onClick: React.PropTypes.any
-};
-
 class JobTypeForm extends JobTypeComponent {
   componentWillMount() {
     if (this.props.id) {
@@ -29,11 +15,7 @@ class JobTypeForm extends JobTypeComponent {
         <PluginPicker store={this.store} categoryPath="root"/>
       );
     }
-    return (
-      <AddStepButton onClick={() => (
-        this.store.dispatch({type: JobTypeAction.showPicker})
-      )}/>
-    );
+    return null;
   }
 
   subcomponentDidUpdateData(data) {
