@@ -19,7 +19,7 @@ module Plugins
           id: 'script',
           name: 'Bash script',
           description: 'Bash script to be run.',
-          default_value: '#!/bin/bash\n\n',
+          default_value: '#!/bin/bash',
           optional: false
         )
       ]

@@ -6,17 +6,20 @@ class JoaquinField extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({value: this.props.value ? this.props.value : ''});
+  }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({value: nextProps.value});
+    this.setState({value: nextProps.value ? nextProps.value : ''});
   }
 
   onChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({value: event.target.value ? event.target.value : ''});
   }
 
   value() {
-    value = this.state.value ? this.state.value : this.props.value;
-    return value ? value : "";
+    return this.state.value;
   }
 
   stringField() {
