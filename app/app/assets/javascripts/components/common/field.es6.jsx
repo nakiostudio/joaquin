@@ -23,7 +23,6 @@ class JoaquinField extends React.Component {
   }
 
   onBlur(event) {
-    console.log(event.target.value);
     var errorMessage = null;
     for (var validator of (this.props.validators || [])) {
       if (!RegExp(validator.regex).test(event.target.value)) {

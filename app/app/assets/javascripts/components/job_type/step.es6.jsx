@@ -1,10 +1,8 @@
 class StepType extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: null
-    };
-    this.fields = {};
+  constructor(props) {
+    super(props);
+
+    this.fields = props.data.plugin.data;
   }
 
   buttons() {
@@ -36,7 +34,7 @@ class StepType extends React.Component {
               type={field.type}
               title={field.name}
               description={field.description}
-              value={this.props.data.plugin.data[field.id] || field.default_value}
+              value={this.fields[field.id] || field.default_value}
               validators={field.validators}
               onChange={event => {
                 this.fields = Object.assign(this.fields, {[field.id]: event.target.value});
