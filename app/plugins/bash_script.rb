@@ -20,7 +20,15 @@ module Plugins
           name: 'Bash script',
           description: 'Bash script to be run.',
           default_value: '#!/bin/bash',
-          optional: false
+          optional: false,
+          validators: [
+            Validator.new(
+              regex: '^(?!\s*$).+',
+              message: {
+                en: 'The script cannot be empty'
+              }
+            )
+          ]
         )
       ]
     end

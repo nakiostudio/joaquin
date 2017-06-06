@@ -2,7 +2,8 @@ class JoaquinField extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: ''
+      value: '',
+      errorMessage: null
     };
   }
 
@@ -15,7 +16,27 @@ class JoaquinField extends React.Component {
   }
 
   onChange(event) {
-    this.setState({value: event.target.value ? event.target.value : ''});
+    this.setState({
+      value: event.target.value ? event.target.value : '',
+      errorMessage: null
+    });
+  }
+
+  onBlur(event) {
+    console.log(event.target.value);
+    var errorMessage = null;
+    for (var validator of (this.props.validators || [])) {
+      if (!RegExp(validator.regex).test(event.target.value)) {
+        errorMessage = validator.message;
+        break;
+      }
+    }
+    this.setState({
+      value: event.target.value ? event.target.value : '',
+      errorMessage: errorMessage
+    });
+
+    this.props.onChange(event);
   }
 
   value() {
@@ -24,13 +45,25 @@ class JoaquinField extends React.Component {
 
   stringField() {
     return (
-      <input className="form-control" type="text" onBlur={this.props.onChange} onChange={this.onChange.bind(this)} value={this.value()}/>
+      <input
+        className="form-control"
+        type="text"
+        onBlur={this.onBlur.bind(this)}
+        onChange={this.onChange.bind(this)}
+        value={this.value()}
+      />
     );
   }
 
   textField() {
     return (
-      <textarea className="form-control" rows="5" onBlur={this.props.onChange} onChange={this.onChange.bind(this)} value={this.value()}/>
+      <textarea
+        className="form-control"
+        rows="5"
+        onBlur={this.onBlur.bind(this)}
+        onChange={this.onChange.bind(this)}
+        value={this.value()}
+      />
     );
   }
 
@@ -42,17 +75,20 @@ class JoaquinField extends React.Component {
   }
 
   description() {
-    if (!this.props.description) {
+    if (!this.props.description && !this.state.errorMessage) {
       return null;
     }
     return (
-      <small id="helpBlock" className="help-block">{ this.props.description }</small>
+      <small id="helpBlock" className="help-block">
+        { this.state.errorMessage || this.props.description }
+      </small>
     );
   }
 
   render() {
+    const errorClassName = this.state.errorMessage ? "has-error" : ""
     return (
-      <div className="form-group">
+      <div className={"form-group " + errorClassName}>
         <label>{ this.props.title }</label>
         { this.field() }
         { this.description() }
@@ -66,5 +102,6 @@ JoaquinField.propTypes = {
   title: React.PropTypes.string,
   description: React.PropTypes.string,
   value: React.PropTypes.any,
+  validators: React.PropTypes.any,
   onChange: React.PropTypes.any
 };

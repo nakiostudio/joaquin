@@ -28,9 +28,27 @@ module Plugins
 
   end
 
+  class Validator
+
+    attr_accessor :regex, :message
+
+    def initialize(options)
+      @regex = options[:regex]
+      @message = options[:message]
+    end
+
+    def payload
+      return {
+        regex: @regex,
+        message: @message[I18n.locale]
+      }
+    end
+
+  end
+
   class Field
 
-    attr_accessor :type, :id, :name, :description, :default_value, :optional, :validate
+    attr_accessor :type, :id, :name, :description, :default_value, :optional, :validators
 
     def initialize(options)
       # Validate input
@@ -43,7 +61,7 @@ module Plugins
       @description = options[:description]
       @default_value = options[:default_value]
       @optional = options[:optional] || true
-      @validate = options[:validate]
+      @validators = options[:validators]
     end
 
     def self.string(options)
@@ -79,7 +97,7 @@ module Plugins
         description: @description,
         default_value: @default_value,
         optional: @optional,
-        validate: @validate
+        validators: @validators && @validators.map { |v| v.payload }
       }
     end
 

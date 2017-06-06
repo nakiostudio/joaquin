@@ -22,7 +22,15 @@ module Plugins
             'Address of the Git repository (http or ssh). Note: if this job is going '\
             'to be triggered by a webhook that provides repository url and branch then '\
             'filling this field is not required.',
-          optional: true
+          optional: true,
+          validators: [
+            Validator.new(
+              regex: '^[^@]+@[^:]+:[^/]+/[^.]+\.git$',
+              message: {
+                en: 'Not valid git repository url'
+              }
+            )
+          ]
         ),
         Field.string(
           id: 'branch',

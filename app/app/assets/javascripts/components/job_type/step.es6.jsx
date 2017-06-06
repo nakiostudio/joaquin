@@ -37,9 +37,10 @@ class StepType extends React.Component {
               title={field.name}
               description={field.description}
               value={this.props.data.plugin.data[field.id] || field.default_value}
-              onChange={event => (
-                this.fields = Object.assign(this.fields, {[field.id]: event.target.value})
-              )}
+              validators={field.validators}
+              onChange={event => {
+                this.fields = Object.assign(this.fields, {[field.id]: event.target.value});
+              }}
             />
           )) }
         </div>
