@@ -4,11 +4,10 @@ class JobTypeDetails extends JobTypeComponent {
       return;
     }
 
-    this.store.dispatch({type: JobTypeAction.loading})
-
     if (!this.state.data) {
       Api.createJobType(name, data => {
         this.store.dispatch({type: JobTypeAction.updated, data: data})
+        this.store.dispatch({type: JobTypeAction.showPicker})
       });
       return;
     }
