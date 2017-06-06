@@ -22,23 +22,28 @@ class JobTypeDetails extends JobTypeComponent {
     const onClick = () => {
       console.log();
     };
+    const button_name = this.state.data ? I18n.t("job_types.details.save") : I18n.t("job_types.details.create");
     return (
       <button type="button" className="btn btn-xs btn-default pull-right" onClick={onClick}>
-        <i className="glyphicon glyphicon-floppy-disk"></i> { I18n.t("job_types.details.save") }
+        <i className="glyphicon glyphicon-floppy-disk"></i> { button_name }
       </button>
     );
   }
 
   addStepButton() {
-    const onClick = () => {
-      this.store.dispatch({type: JobTypeAction.showPicker})
-    };
-    const disabled = this.state.showPicker ? "disabled" : "";
-    return (
-      <button type="button" className={"btn btn-xs btn-default " + disabled} onClick={onClick}>
-        <i className="glyphicon glyphicon-plus"></i> { I18n.t("job_types.details.add_step") }
-      </button>
-    );
+    if (this.state.data) {
+      const onClick = () => {
+        this.store.dispatch({type: JobTypeAction.showPicker})
+      };
+      const disabled = this.state.showPicker ? "disabled" : "";
+      return (
+        <button type="button" className={"btn btn-xs btn-default " + disabled} onClick={onClick}>
+          <i className="glyphicon glyphicon-plus"></i> { I18n.t("job_types.details.add_step") }
+        </button>
+      );
+    }
+
+    return ( <small>{ I18n.t("job_types.details.empty_hint") }</small> );
   }
 
   render() {

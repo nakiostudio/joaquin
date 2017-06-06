@@ -33,7 +33,9 @@ en:
       name: "Job name"
       description: "An unique and descriptive name to identify this job."
       save: "Save"
+      create: "Create"
       add_step: "Add Step"
+      empty_hint: "Fill in a name that identifies your job and click on \"Create\" to continue"
     step_types:
       save: "Save"
       remove: "Remove"
