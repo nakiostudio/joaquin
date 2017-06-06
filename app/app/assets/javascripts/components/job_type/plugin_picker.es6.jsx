@@ -56,18 +56,21 @@ class PluginPicker extends JobTypeComponent {
   }
 
   render() {
+    const onCloseButtonClick = () => (
+      this.store.dispatch({type: JobTypeAction.hidePicker})
+    );
+    const closeButton = (
+      <button type="button" className="btn btn-xs btn-default pull-right" onClick={onCloseButtonClick}>
+        <i className="glyphicon glyphicon-remove"></i> { I18n.t("job_types.plugins.close") }
+      </button>
+    );
     return (
-      <div className="row">
-        <div className="col-md-6">
-          <label>{ I18n.t('job_types.plugins.help.title') }</label>
-          <p>{ I18n.t('job_types.plugins.help.message') }</p>
+      <JoaquinPanel className="row" title={ I18n.t("job_types.plugins.title") } button={closeButton}>
+        <div className="panel-body">
+          <p>{ I18n.t('job_types.plugins.help') }</p>
         </div>
-        <div className="col-md-6">
-          <JoaquinPanel title={ I18n.t("job_types.plugins.title") }>
-            { this.pickerBody() }
-          </JoaquinPanel>
-        </div>
-      </div>
+        { this.pickerBody() }
+      </JoaquinPanel>
     );
   }
 }

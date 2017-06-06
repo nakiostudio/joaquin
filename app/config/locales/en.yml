@@ -24,10 +24,9 @@ en:
       index: "Jobs"
       new: "Create job"
     plugins:
-      title: "Step type"
-      help:
-        title: "Adding a step"
-        message: "A job is made of many steps. To make your life easier you can select one of the step types or templates available, if not, you can always use the \"Bash script\" step type to have absolute control."
+      close: "Close"
+      title: "Add step type"
+      help: "A job is made of many steps. To make your life easier you can select one of the step types or templates available, if not, you can always use the \"Bash script\" step type to have absolute control."
     details:
       title: "Job type details"
       name: "Job name"
