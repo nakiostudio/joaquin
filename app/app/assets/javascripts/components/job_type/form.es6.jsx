@@ -1,12 +1,12 @@
 class JobTypeForm extends JobTypeComponent {
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.id) {
       Api.getJobType(this.props.id, data => (
         this.store.dispatch({type: JobTypeAction.updated, data: data})
       ));
       return;
     }
-    this.setState({data: null});
+    this.store.dispatch({type: JobTypeAction.restart});
   }
 
   footer() {
@@ -18,7 +18,7 @@ class JobTypeForm extends JobTypeComponent {
     return null;
   }
 
-  subcomponentDidUpdateData(data) {
+  stepDidUpdateData(data) {
     this.store.dispatch({type: JobTypeAction.updated, data: data})
   }
 
@@ -28,7 +28,7 @@ class JobTypeForm extends JobTypeComponent {
       <div>
         <JobTypeDetails editable={this.props.editable} store={this.store}/>
         { step_types.map(step_type => (
-          <StepType key={step_type.id} data={step_type} jobTypeId={this.state.data.id} onChange={this.subcomponentDidUpdateData.bind(this)}/>
+          <StepType key={step_type.id} data={step_type} jobTypeId={this.state.data.id} onChange={this.stepDidUpdateData.bind(this)}/>
         )) }
         { this.footer() }
       </div>

@@ -15,5 +15,6 @@ class JobTypeComponent extends React.Component {
   componentWillUnmount() {
     // Stop observing Store
     this.unsubscribe();
+    this.store = null;
   }
 }

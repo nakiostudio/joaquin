@@ -27,7 +27,6 @@ class StepType extends React.Component {
   }
 
   render() {
-    console.log(this.props.data);
     return (
       <JoaquinPanel title={this.props.data.plugin.name} button={this.buttons()}>
         <div className="panel-body">
