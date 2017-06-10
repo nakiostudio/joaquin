@@ -48,7 +48,7 @@ class StepType extends React.Component {
 }
 
 StepType.propTypes = {
-  jobTypeId: React.PropTypes.any,
-  data: React.PropTypes.any,
-  onChange: React.PropTypes.any
+  jobTypeId: PropTypes.any,
+  data: PropTypes.any,
+  onChange: PropTypes.any
 };

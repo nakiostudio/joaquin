@@ -14,7 +14,7 @@ class JoaquinPanel extends React.Component {
 }
 
 JoaquinPanel.propTypes = {
-  title: React.PropTypes.any,
-  type: React.PropTypes.any,
-  button: React.PropTypes.any
+  title: PropTypes.any,
+  type: PropTypes.any,
+  button: PropTypes.any
 }

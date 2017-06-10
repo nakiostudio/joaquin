@@ -16,9 +16,9 @@ class PluginPickerEntry extends React.Component {
 }
 
 PluginPickerEntry.propTypes = {
-  data: React.PropTypes.any,
-  type: React.PropTypes.string,
-  onClick: React.PropTypes.any
+  data: PropTypes.any,
+  type: PropTypes.string,
+  onClick: PropTypes.any
 };
 
 class PluginPicker extends JobTypeComponent {
@@ -76,6 +76,6 @@ class PluginPicker extends JobTypeComponent {
 }
 
 PluginPicker.propTypes = {
-  store: React.PropTypes.any,
-  categoryPath: React.PropTypes.string
+  store: PropTypes.any,
+  categoryPath: PropTypes.string
 };

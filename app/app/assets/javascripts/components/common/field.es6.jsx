@@ -97,10 +97,10 @@ class JoaquinField extends React.Component {
 }
 
 JoaquinField.propTypes = {
-  type: React.PropTypes.string,
-  title: React.PropTypes.string,
-  description: React.PropTypes.string,
-  value: React.PropTypes.any,
-  validators: React.PropTypes.any,
-  onChange: React.PropTypes.any
+  type: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  value: PropTypes.any,
+  validators: PropTypes.any,
+  onChange: PropTypes.any
 };
