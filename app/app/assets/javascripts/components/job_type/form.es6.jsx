@@ -37,6 +37,6 @@ class JobTypeForm extends JobTypeComponent {
 }
 
 JobTypeForm.propTypes = {
-  id: React.PropTypes.any,
-  editable: React.PropTypes.bool
+  id: PropTypes.any,
+  editable: PropTypes.bool
 };

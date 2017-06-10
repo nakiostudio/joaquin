@@ -2,10 +2,8 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
-//= require react
+//= require ./dependencies
+//= require react-server
 //= require react_ujs
-//= require whatwg-fetch/fetch
-//= require redux/dist/redux
 //= require i18n/translations
-//= require components
 //= require_tree .

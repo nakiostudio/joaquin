@@ -70,6 +70,6 @@ class JobTypeDetails extends JobTypeComponent {
 }
 
 JobTypeDetails.propTypes = {
-  store: React.PropTypes.any,
-  editable: React.PropTypes.bool
+  store: PropTypes.any,
+  editable: PropTypes.bool
 };

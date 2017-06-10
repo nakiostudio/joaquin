@@ -20,6 +20,14 @@
   },
   "homepage": "https://github.com/nakiostudio/joaquin#readme",
   "dependencies": {
+    "browserify": "^14.4.0",
+    "browserify-incremental": "^3.1.1",
+    "material-ui": "^0.18.3",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "whatwg-fetch": "^2.0.3"
   },
