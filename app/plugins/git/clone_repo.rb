@@ -22,6 +22,7 @@ module Plugins
             'Address of the Git repository (http or ssh). Note: if this job is going '\
             'to be triggered by a webhook that provides repository url and branch then '\
             'filling this field is not required.',
+          placeholder: 'git@github.com:my_account/my_repo.git',
           optional: true,
           validators: [
             Validator.new(
@@ -39,6 +40,7 @@ module Plugins
             'Brand to checkout once the repository is cloned. Note: if this job is going '\
             'to be triggered by a webhook that provides repository url and branch then '\
             'filling this field is not required.',
+          placeholder: 'master',
           optional: true
         )
       ]

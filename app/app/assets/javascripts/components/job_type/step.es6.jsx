@@ -14,19 +14,15 @@ class StepType extends React.Component {
     };
     return (
       <div className="btn-group btn-group-xs pull-right">
-        <button type="button" className="btn btn-xs btn-default" onClick={saveOnClick}>
-          <i className="glyphicon glyphicon-floppy-disk"></i> { I18n.t("job_types.step_types.save") }
-        </button>
-        <button type="button" className="btn btn-xs btn-default" onClick={removeOnClick}>
-          <i className="glyphicon glyphicon-trash"></i> { I18n.t("job_types.step_types.remove") }
-        </button>
+        <JoaquinBarButton title={I18n.t("job_types.step_types.save")} icon="done" onClick={saveOnClick}/>
+        <JoaquinBarButton title={I18n.t("job_types.step_types.remove")} icon="clear" onClick={removeOnClick}/>
       </div>
     );
   }
 
   render() {
     return (
-      <JoaquinPanel title={this.props.data.plugin.name} button={this.buttons()}>
+      <JoaquinPanel title={this.props.data.plugin.name} options={this.buttons()}>
         <div className="panel-body">
           { this.props.data.plugin.fields.map(field => (
             <JoaquinField
@@ -34,6 +30,7 @@ class StepType extends React.Component {
               type={field.type}
               title={field.name}
               description={field.description}
+              placeholder={field.placeholder}
               value={this.fields[field.id] || field.default_value}
               validators={field.validators}
               onChange={event => {
@@ -41,6 +38,7 @@ class StepType extends React.Component {
               }}
             />
           )) }
+          <br/>
         </div>
       </JoaquinPanel>
     );

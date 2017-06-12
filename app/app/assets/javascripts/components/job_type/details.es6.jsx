@@ -18,14 +18,12 @@ class JobTypeDetails extends JobTypeComponent {
   }
 
   saveDetailsButton() {
+    const buttonName = this.state.data ? I18n.t("job_types.details.save") : I18n.t("job_types.details.create");
     const onClick = () => {
       console.log();
     };
-    const button_name = this.state.data ? I18n.t("job_types.details.save") : I18n.t("job_types.details.create");
     return (
-      <button type="button" className="btn btn-xs btn-default pull-right" onClick={onClick}>
-        <i className="glyphicon glyphicon-floppy-disk"></i> { button_name }
-      </button>
+      <JoaquinBarButton onClick={onClick} title={buttonName} icon="done"/>
     );
   }
 
@@ -36,9 +34,11 @@ class JobTypeDetails extends JobTypeComponent {
       };
       const disabled = this.state.showPicker ? "disabled" : "";
       return (
-        <button type="button" className={"btn btn-xs btn-default " + disabled} onClick={onClick}>
-          <i className="glyphicon glyphicon-plus"></i> { I18n.t("job_types.details.add_step") }
-        </button>
+        <JoaquinBottomButton
+          title={I18n.t("job_types.details.add_step")}
+          onClick={onClick}
+          disabled={disabled}
+        />
       );
     }
 
@@ -48,7 +48,7 @@ class JobTypeDetails extends JobTypeComponent {
   render() {
     const name = this.state.data ? this.state.data.name : "";
     return (
-      <JoaquinPanel title={I18n.t("job_types.details.title")} button={this.saveDetailsButton()}>
+      <JoaquinPanel title={I18n.t("job_types.details.title")} options={this.saveDetailsButton()}>
         <div className="panel-body">
           <JoaquinField
             type="string"
@@ -61,9 +61,9 @@ class JobTypeDetails extends JobTypeComponent {
             )}
           />
         </div>
-        <div className="panel-footer">
+        <MUI.CardActions>
           { this.addStepButton() }
-        </div>
+        </MUI.CardActions>
       </JoaquinPanel>
     );
   }

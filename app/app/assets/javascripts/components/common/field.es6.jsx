@@ -7,6 +7,8 @@ class JoaquinField extends React.Component {
     };
   }
 
+  // Override functions and callbacks
+
   componentDidMount() {
     this.setState({value: this.props.value ? this.props.value : ''});
   }
@@ -38,59 +40,81 @@ class JoaquinField extends React.Component {
     this.props.onChange(event);
   }
 
+  // Propreties
+
   value() {
     return this.state.value;
   }
 
+  // Styles
+
+  // Field types
+
   stringField() {
     return (
-      <input
-        className="form-control"
-        type="text"
+      <MUI.TextField
+        hintText={this.props.placeholder}
+        floatingLabelText={this.props.title}
+        floatingLabelFixed={true}
+        errorText={this.state.errorMessage}
         onBlur={this.onBlur.bind(this)}
         onChange={this.onChange.bind(this)}
         value={this.value()}
+        fullWidth={true}
+        underlineStyle={{color: Colors.fullBlack}}
+        style={{marginTop: -10, marginBottom: -10}}
       />
     );
   }
 
   textField() {
     return (
-      <textarea
-        className="form-control"
-        rows="5"
+      <MUI.TextField
+        rows={5}
+        multiLine={true}
+        hintText={this.props.placeholder}
+        floatingLabelText={this.props.title}
+        floatingLabelFixed={true}
+        errorText={this.state.errorMessage}
         onBlur={this.onBlur.bind(this)}
         onChange={this.onChange.bind(this)}
         value={this.value()}
+        fullWidth={true}
+        style={{marginTop: -10, marginBottom: -10}}
+        textareaStyle={{
+          backgroundColor: Colors.grey50,
+          padding: 5,
+          fontSize: "small",
+          lineHeight: 1.4,
+          fontFamily: "Source Code Pro"
+        }}
       />
     );
   }
 
-  field() {
-    if (this.props.type == "string") {
-      return  this.stringField();
-    }
-    return this.textField();
-  }
-
   description() {
-    if (!this.props.description && !this.state.errorMessage) {
+    if (this.state.errorMessage) {
       return null;
     }
     return (
-      <small id="helpBlock" className="help-block">
-        { this.state.errorMessage || this.props.description }
-      </small>
+      <p style={{marginTop: 8, fontSize: "85%", color: Colors.grey400}}>
+        {this.props.description}
+      </p>
     );
   }
 
   render() {
-    const errorClassName = this.state.errorMessage ? "has-error" : ""
+    let field = null;
+    if (this.props.type == "string") {
+      field = this.stringField();
+    }
+    else if (this.props.type = "text") {
+      field = this.textField();
+    }
     return (
-      <div className={"form-group " + errorClassName}>
-        <label>{ this.props.title }</label>
-        { this.field() }
-        { this.description() }
+      <div>
+        {field}
+        {this.description()}
       </div>
     );
   }
@@ -101,6 +125,7 @@ JoaquinField.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   value: PropTypes.any,
+  placeholder: PropTypes.any,
   validators: PropTypes.any,
   onChange: PropTypes.any
 };
