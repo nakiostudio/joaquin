@@ -1,20 +1,22 @@
 class JoaquinPanel extends React.Component {
   render() {
-    const panelType = this.props.type ? this.props.type : "default";
     return (
-      <div className={"panel panel-" + panelType}>
-        <div className="panel-heading">
-          { this.props.title }
-          { this.props.button }
-        </div>
-        { this.props.children }
-      </div>
+      <MUI.Card style={{marginBottom: 20}}>
+        <MUI.Toolbar>
+          <MUI.ToolbarGroup firstChild={true} style={{paddingLeft: 16}}>
+            <MUI.ToolbarTitle text={this.props.title} style={{fontSize: "medium"}}/>
+          </MUI.ToolbarGroup>
+          <MUI.ToolbarGroup lastChild={true} style={{paddingRight: 16}}>
+            {this.props.options}
+          </MUI.ToolbarGroup>
+        </MUI.Toolbar>
+          { this.props.children }
+      </MUI.Card>
     );
   }
 }
 
 JoaquinPanel.propTypes = {
   title: PropTypes.any,
-  type: PropTypes.any,
-  button: PropTypes.any
+  options: PropTypes.any
 }

@@ -48,7 +48,7 @@ module Plugins
 
   class Field
 
-    attr_accessor :type, :id, :name, :description, :default_value, :optional, :validators
+    attr_accessor :type, :id, :name, :description, :placeholder, :default_value, :optional, :validators
 
     def initialize(options)
       # Validate input
@@ -59,6 +59,7 @@ module Plugins
       @id = options[:id]
       @name = options[:name]
       @description = options[:description]
+      @placeholder = options[:placeholder]
       @default_value = options[:default_value]
       @optional = options[:optional] || true
       @validators = options[:validators]
@@ -95,6 +96,7 @@ module Plugins
         type: @type,
         name: @name,
         description: @description,
+        placeholder: @placeholder,
         default_value: @default_value,
         optional: @optional,
         validators: @validators && @validators.map { |v| v.payload }
