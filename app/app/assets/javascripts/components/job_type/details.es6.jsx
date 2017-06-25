@@ -4,23 +4,33 @@ class JobTypeDetails extends JobTypeComponent {
       return;
     }
 
-    if (!this.state.data) {
-      Api.createJobType(name, data => {
-        this.store.dispatch({type: JobTypeAction.updated, data: data})
-        this.store.dispatch({type: JobTypeAction.showPicker})
-      });
-      return;
-    }
-
     Api.updateJobType(this.state.data.id, name, data => {
       this.store.dispatch({type: JobTypeAction.updated, data: data})
     });
   }
 
+  createJob(name) {
+    if (!name || name.length == 0) {
+      return;
+    }
+
+    Api.createJobType(name, data => {
+      window.location.href = "/job_types/" + data.id;
+    });
+  }
+
+  // Subcomponents
+
   saveDetailsButton() {
     const buttonName = this.state.data ? I18n.t("job_types.details.save") : I18n.t("job_types.details.create");
     const onClick = () => {
-      console.log();
+      const name = this.state.name;
+      if (!this.state.data) {
+        this.createJob(name);
+        return;
+      }
+
+      this.updateName(name);
     };
     return (
       <JoaquinBarButton onClick={onClick} title={buttonName} icon="done"/>
@@ -46,7 +56,7 @@ class JobTypeDetails extends JobTypeComponent {
   }
 
   render() {
-    const name = this.state.data ? this.state.data.name : "";
+    const name = this.state.name ? this.state.name : (this.state.data ? this.state.data.name : '');
     return (
       <JoaquinPanel title={I18n.t("job_types.details.title")} options={this.saveDetailsButton()}>
         <div className="panel-body">
@@ -57,7 +67,7 @@ class JobTypeDetails extends JobTypeComponent {
             description={I18n.t("job_types.details.description")}
             value={name}
             onChange={event => (
-              this.updateName(event.target.value)
+              this.setState({name: event.target.value})
             )}
           />
         </div>
